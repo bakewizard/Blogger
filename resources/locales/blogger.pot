@@ -1,0 +1,96 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2019-12-30 01:37+0200\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller/AppController.php:21
+msgid "Blog"
+msgstr ""
+
+#: Controller/ArticlesController.php:166
+msgid "Thanks for your comment. It will be available after moderation"
+msgstr ""
+
+#: Controller/ArticlesController.php:168
+msgid "Thanks for your comment"
+msgstr ""
+
+#: Controller/ArticlesController.php:171
+msgid "There was an error while saving your comment. Try again"
+msgstr ""
+
+#: Event/CommentListener.php:41
+msgid "New reply to your comment"
+msgstr ""
+
+#: Event/CommentListener.php:51
+msgid "New comment to your article"
+msgstr ""
+
+#: Model/Table/ArticlesTable.php:125
+msgid "Choose at least one category!"
+msgstr ""
+
+#: Template/Articles/index.ctp:38
+msgid "Read more"
+msgstr ""
+
+#: Template/Articles/index.ctp:45
+msgid "Nothing found"
+msgstr ""
+
+#: Template/Articles/main.ctp:21
+msgid "Page {{page}}-{{pages}} of {{count}} records"
+msgstr ""
+
+#: Template/Articles/view.ctp:45
+msgid "Leave your comment"
+msgstr ""
+
+#: Template/Articles/view.ctp:49
+msgid "You must be registered and logged in to leave comments"
+msgstr ""
+
+#: Template/Cell/Search/display.ctp:8
+msgid "Search"
+msgstr ""
+
+#: Template/Element/Comments/comment.ctp:28
+msgid "Reply"
+msgstr ""
+
+#: Template/Element/Comments/form.ctp:14
+msgid "Comment"
+msgstr ""
+
+#: Template/Element/Comments/form.ctp:18
+msgid "Name"
+msgstr ""
+
+#: Template/Element/Comments/form.ctp:21
+msgid "Email"
+msgstr ""
+
+#: Template/Element/Comments/form.ctp:25
+msgid "Send"
+msgstr ""
+
+#: Template/Email/html/comment_notify.ctp:2
+msgid "You have a new comment to your article"
+msgstr ""
+
+#: Template/Email/html/reply_notify.ctp:2
+msgid "You have a new reply to your comment"
+msgstr ""
+

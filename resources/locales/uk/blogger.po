@@ -1,0 +1,111 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2019-12-30 01:37+0200\n"
+"PO-Revision-Date: 2019-12-30 01:45+0200\n"
+"Last-Translator: Yuriy <yura_m436@ukr.net>\n"
+"Language-Team: LANGUAGE <yura_m436@ukr.net>\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.0.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: Controller/AppController.php:21
+msgid "Blog"
+msgstr "Блог"
+
+#: Controller/ArticlesController.php:166
+msgid "Thanks for your comment. It will be available after moderation"
+msgstr ""
+"Дякуємо за ваш коментар. Він буде доступний після проходження модерації"
+
+#: Controller/ArticlesController.php:168
+msgid "Thanks for your comment"
+msgstr "Дякуємо за ваш коментар"
+
+#: Controller/ArticlesController.php:171
+msgid "There was an error while saving your comment. Try again"
+msgstr "Виникла помилка під час збереження коментаря. Спробуйте ще раз"
+
+#: Event/CommentListener.php:41
+msgid "New reply to your comment"
+msgstr "Нова відповідь на ваш коментар"
+
+#: Event/CommentListener.php:51
+msgid "New comment to your article"
+msgstr "Новий коментар на вашу статтю"
+
+#: Model/Table/ArticlesTable.php:125
+msgid "Choose at least one category!"
+msgstr "Створіть хоча б одну категорію!"
+
+#: Template/Articles/index.ctp:38
+msgid "Read more"
+msgstr "Переглянути"
+
+#: Template/Articles/index.ctp:45
+msgid "Nothing found"
+msgstr "Нічого не знайдено"
+
+#: Template/Articles/main.ctp:21
+msgid "Page {{page}}-{{pages}} of {{count}} records"
+msgstr "Сторінка {{page}}-{{pages}} з {{count}} записів"
+
+#: Template/Articles/view.ctp:45
+msgid "Leave your comment"
+msgstr "Залиште свій коментар"
+
+#: Template/Articles/view.ctp:49
+msgid "You must be registered and logged in to leave comments"
+msgstr "Ви повинні зареєструватися і ввійти, щоб залишити коментар"
+
+#: Template/Cell/Search/display.ctp:8
+msgid "Search"
+msgstr "Пошук"
+
+#: Template/Element/Comments/comment.ctp:28
+msgid "Reply"
+msgstr "Відповісти"
+
+#: Template/Element/Comments/form.ctp:14
+msgid "Comment"
+msgstr "Коментар"
+
+#: Template/Element/Comments/form.ctp:18
+msgid "Name"
+msgstr "Ім'я"
+
+#: Template/Element/Comments/form.ctp:21
+msgid "Email"
+msgstr "Email"
+
+#: Template/Element/Comments/form.ctp:25
+msgid "Send"
+msgstr "Надіслати"
+
+#: Template/Email/html/comment_notify.ctp:2
+msgid "You have a new comment to your article"
+msgstr "Ви маєте новий коментар на вашу статтю"
+
+#: Template/Email/html/reply_notify.ctp:2
+msgid "You have a new reply to your comment"
+msgstr "Ви маєте нову відповідь на ваш коментар"
+
+#~ msgid "The article has been saved."
+#~ msgstr "Стаття була записана."
+
+#~ msgid "The article could not be saved. Please, try again."
+#~ msgstr "Стаття не була записана. Будь ласка, спробуйте ще раз."
+
+#~ msgid "The article has been deleted."
+#~ msgstr "Стаття була видалена."
+
+#~ msgid "The article could not be deleted. Please, try again."
+#~ msgstr "Стаття не може бути видалена. Будь ласка, спробуйте ще раз."
