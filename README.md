@@ -1,6 +1,7 @@
 # Blogger Plugin for BakeKit
 
 The `Blogger` plugin adds blogging functionality to [BakeKit CMS](https://github.com/bakewizard/BakeKit), including posts, categories, and tags.
+
 ## Features
 
 - Create and manage blog posts
