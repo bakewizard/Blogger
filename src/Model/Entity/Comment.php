@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Model\Entity;
@@ -31,7 +30,6 @@ use Cake\ORM\Entity;
  */
 class Comment extends Entity
 {
-
     protected array $_accessible = [
         'parent_id' => true,
         'user_id' => true,
@@ -49,7 +47,6 @@ class Comment extends Entity
         'user' => true,
         'article' => true,
         'parent_comment' => true,
-        'child_comments' => true
+        'child_comments' => true,
     ];
-
 }

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Model\Entity;
@@ -29,7 +28,6 @@ use Cake\ORM\Entity;
  */
 class Article extends Entity
 {
-
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -55,7 +53,7 @@ class Article extends Entity
         'categories' => true,
         'tags' => true,
         'comments' => true,
-        'tag_string' => true
+        'tag_string' => true,
     ];
 
     protected function _getTagString()
@@ -70,6 +68,7 @@ class Article extends Entity
         $str = $tags->reduce(function ($string, $tag) {
             return $string . $tag->title . ', ';
         }, '');
+
         return trim($str, ', ');
     }
 }

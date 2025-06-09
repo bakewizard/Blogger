@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Model\Table;
@@ -7,12 +6,12 @@ namespace Blogger\Model\Table;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Override;
 
 /**
  * Tags Model
  *
  * @property \Blogger\Model\Table\ArticlesTable|\Cake\ORM\Association\BelongsToMany $Articles
- *
  * @method \Blogger\Model\Entity\Tag get($primaryKey, $options = [])
  * @method \Blogger\Model\Entity\Tag newEntity($data = null, array $options = [])
  * @method \Blogger\Model\Entity\Tag[] newEntities(array $data, array $options = [])
@@ -24,14 +23,13 @@ use Cake\Validation\Validator;
  */
 class TagsTable extends Table
 {
-
     /**
      * Initialize method
      *
      * @param array $config The configuration for the Table.
      * @return void
      */
-    #[\Override]
+    #[Override]
     public function initialize(array $config): void
     {
         parent::initialize($config);
@@ -44,12 +42,12 @@ class TagsTable extends Table
             'foreignKey' => 'tag_id',
             'targetForeignKey' => 'article_id',
             'joinTable' => 'blogger_articles_tags',
-            'className' => 'Blogger.Articles'
+            'className' => 'Blogger.Articles',
         ]);
 
         $this->addBehavior('Translate', [
             'fields' => ['title'],
-            'translationTable' => 'BloggerTagsI18n'
+            'translationTable' => 'BloggerTagsI18n',
         ]);
     }
 
@@ -59,7 +57,7 @@ class TagsTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    #[\Override]
+    #[Override]
     public function validationDefault(Validator $validator): Validator
     {
         $validator
@@ -88,7 +86,7 @@ class TagsTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    #[\Override]
+    #[Override]
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['alias']));

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Model\Entity;
@@ -18,16 +17,14 @@ use Cake\Utility\Text;
  */
 class Tag extends Entity
 {
-
     protected array $_accessible = [
         'title' => true,
         'alias' => true,
-        'articles' => true
+        'articles' => true,
     ];
 
     protected function _setAlias($alias)
     {
         return strtolower(Text::slug($alias));
     }
-
 }

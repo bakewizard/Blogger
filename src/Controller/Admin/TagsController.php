@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Controller\Admin;
@@ -8,17 +7,15 @@ namespace Blogger\Controller\Admin;
  * Tags Controller
  *
  * @property \Blogger\Model\Table\TagsTable $Tags
- *
  * @method \Blogger\Model\Entity\Tag[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class TagsController extends AppController
 {
-
     /**
      * Tags list
-     * 
+     *
      * Displays a tags list
-     * 
+     *
      * @return \Cake\Http\Response|null
      */
     public function index()
@@ -30,7 +27,7 @@ class TagsController extends AppController
 
     /**
      * New tag
-     * 
+     *
      * Creates a new tag
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
@@ -58,7 +55,7 @@ class TagsController extends AppController
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit(?string $id = null)
     {
         $tag = $this->Tags->get($id, contain: ['Articles']);
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -81,7 +78,7 @@ class TagsController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete(?string $id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $tag = $this->Tags->get($id);

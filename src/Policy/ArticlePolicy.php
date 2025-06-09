@@ -1,19 +1,26 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Policy;
 
-use Blogger\Model\Entity\Article;
 use Authorization\IdentityInterface;
 use Authorization\Policy\BeforePolicyInterface;
 use Authorization\Policy\Result;
 use Authorization\Policy\ResultInterface;
+use Blogger\Model\Entity\Article;
+use Override;
 
 class ArticlePolicy implements BeforePolicyInterface
 {
-
-    #[\Override]
+    /**
+     * Pre-authorization check
+     *
+     * @param \App\Model\Entity\User|null $identity
+     * @param mixed $resource
+     * @param string $action
+     * @return \Authorization\Policy\ResultInterface|bool|null
+     */
+    #[Override]
     public function before(?IdentityInterface $identity, mixed $resource, string $action): ResultInterface|bool|null
     {
         if (!$identity) {
@@ -27,7 +34,14 @@ class ArticlePolicy implements BeforePolicyInterface
         return null;
     }
 
-    public function canView(IdentityInterface $user, Article $article)
+    /**
+     * View check
+     *
+     * @param \App\Model\Entity\User $user
+     * @param \Blogger\Model\Entity\Article $article
+     * @return \Authorization\Policy\Result|bool
+     */
+    public function canView(IdentityInterface $user, Article $article): bool|Result
     {
         if ($user->id == $article->author_id) {
             return new Result(true);
@@ -36,7 +50,14 @@ class ArticlePolicy implements BeforePolicyInterface
         return new Result(false, __('User can only view his own article.'));
     }
 
-    public function canEdit(IdentityInterface $user, Article $article)
+    /**
+     * Edit check
+     *
+     * @param \App\Model\Entity\User $user
+     * @param \Blogger\Model\Entity\Article $article
+     * @return \Authorization\Policy\Result|bool
+     */
+    public function canEdit(IdentityInterface $user, Article $article): bool|Result
     {
         if ($user->id == $article->author_id) {
             return new Result(true);
@@ -45,7 +66,14 @@ class ArticlePolicy implements BeforePolicyInterface
         return new Result(false, __('User can only edit his own article.'));
     }
 
-    public function canDelete(IdentityInterface $user, Article $article)
+    /**
+     * Delete check
+     *
+     * @param \App\Model\Entity\User $user
+     * @param \Blogger\Model\Entity\Article $article
+     * @return \Authorization\Policy\Result|bool
+     */
+    public function canDelete(IdentityInterface $user, Article $article): bool|Result
     {
         if ($user->id == $article->author_id) {
             return new Result(true);

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Controller;
@@ -16,11 +15,10 @@ use Cake\Utility\Hash;
  */
 class ArticlesController extends AppController
 {
-
     public array $paginate = [
         'order' => [
-            'Articles.created' => 'desc'
-        ]
+            'Articles.created' => 'desc',
+        ],
     ];
 
     public function initialize(): void
@@ -31,7 +29,7 @@ class ArticlesController extends AppController
 
     /**
      * Articles list
-     * 
+     *
      * Displays an articles list
      *
      * @return \Cake\Http\Response|null
@@ -58,16 +56,15 @@ class ArticlesController extends AppController
 
     /**
      * Single article
-     * 
-     * Displays a single article
-     * 
-     * @items Articles
      *
+     * Displays a single article
+     *
+     * @items Articles
      * @param string|null $id Article id.
      * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view(?string $id = null)
     {
         $article = $this->Articles->findById($id)
                 ->find('published')
@@ -92,8 +89,8 @@ class ArticlesController extends AppController
         $query = $this->Articles->find('published')
                 ->contain(['Users'])
                 ->innerJoinWith('Categories', function ($q) use ($ids) {
-            return $q->where(['Categories.id IN' => $ids]);
-        });
+                    return $q->where(['Categories.id IN' => $ids]);
+                });
 
         $articles = $this->paginate($query);
 
@@ -107,8 +104,8 @@ class ArticlesController extends AppController
         $query = $this->Articles->find('published')
                 ->contain(['Users'])
                 ->innerJoinWith('Tags', function ($q) use ($alias) {
-            return $q->where(['Tags.alias' => $alias]);
-        });
+                    return $q->where(['Tags.alias' => $alias]);
+                });
 
         $articles = $this->paginate($query);
 
@@ -122,8 +119,8 @@ class ArticlesController extends AppController
         $query = $this->Articles->find('published')
                 ->contain(['Users'])
                 ->innerJoinWith('Users', function ($q) use ($id) {
-            return $q->where(['Users.id' => $id]);
-        });
+                    return $q->where(['Users.id' => $id]);
+                });
 
         $articles = $this->paginate($query);
 
@@ -137,17 +134,18 @@ class ArticlesController extends AppController
         $query = $this->Articles->find('published')
                 ->contain(['Users'])
                 ->where(function (QueryExpression $exp, Query $q) use ($year, $month, $day) {
-            $exp = $exp->eq($q->func()->year(['Articles.created' => 'identifier']), $year);
+                    $exp = $exp->eq($q->func()->year(['Articles.created' => 'identifier']), $year);
 
-            if ($month) {
-                $exp = $exp->eq($q->func()->month(['Articles.created' => 'identifier']), $month);
-            }
+                    if ($month) {
+                        $exp = $exp->eq($q->func()->month(['Articles.created' => 'identifier']), $month);
+                    }
 
-            if ($day) {
-                $exp = $exp->eq($q->func()->day(['Articles.created' => 'identifier']), $day);
-            }
-            return $exp;
-        });
+                    if ($day) {
+                        $exp = $exp->eq($q->func()->day(['Articles.created' => 'identifier']), $day);
+                    }
+
+                    return $exp;
+                });
 
         $articles = $this->paginate($query);
 
@@ -176,6 +174,7 @@ class ArticlesController extends AppController
             } else {
                 $this->Flash->error(__d('blogger', 'There was an error while saving your comment. Try again'));
             }
+
             return $this->redirect($this->referer());
         }
     }

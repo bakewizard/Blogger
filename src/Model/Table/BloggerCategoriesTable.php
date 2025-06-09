@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Blogger\Model\Table;
 
-use Cake\ORM\Query\SelectQuery;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -13,7 +12,6 @@ use Cake\Validation\Validator;
  *
  * @property \Blogger\Model\Table\BloggerCategoriesTable&\Cake\ORM\Association\BelongsTo $ParentBloggerCategories
  * @property \Blogger\Model\Table\BloggerCategoriesTable&\Cake\ORM\Association\HasMany $ChildBloggerCategories
- *
  * @method \Blogger\Model\Entity\BloggerCategory newEmptyEntity()
  * @method \Blogger\Model\Entity\BloggerCategory newEntity(array $data, array $options = [])
  * @method array<\Blogger\Model\Entity\BloggerCategory> newEntities(array $data, array $options = [])
@@ -27,7 +25,6 @@ use Cake\Validation\Validator;
  * @method iterable<\Blogger\Model\Entity\BloggerCategory>|\Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\BloggerCategory> saveManyOrFail(iterable $entities, array $options = [])
  * @method iterable<\Blogger\Model\Entity\BloggerCategory>|\Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\BloggerCategory>|false deleteMany(iterable $entities, array $options = [])
  * @method iterable<\Blogger\Model\Entity\BloggerCategory>|\Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\BloggerCategory> deleteManyOrFail(iterable $entities, array $options = [])
- *
  * @mixin \Cake\ORM\Behavior\TreeBehavior
  */
 class BloggerCategoriesTable extends Table

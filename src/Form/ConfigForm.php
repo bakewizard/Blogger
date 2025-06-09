@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Form;
@@ -14,11 +13,10 @@ use Cake\Validation\Validator;
  */
 class ConfigForm extends Form
 {
-
     /**
      * Builds the schema for the modelless form
      *
-     * @param Schema $schema From schema
+     * @param \Cake\Form\Schema $schema From schema
      * @return $this
      */
     protected function _buildSchema(Schema $schema): Schema
@@ -34,8 +32,8 @@ class ConfigForm extends Form
     /**
      * Form validation builder
      *
-     * @param Validator $validator to use against the form
-     * @return Validator
+     * @param \Cake\Validation\Validator $validator to use against the form
+     * @return \Cake\Validation\Validator
      */
     public function validationDefault(Validator $validator): Validator
     {
@@ -45,8 +43,7 @@ class ConfigForm extends Form
                                 ->nonNegativeInteger('depth')
                                 ->boolean('registration')
                                 ->boolean('moderation')
-                                ->boolean('notification')
-        );
+                                ->boolean('notification'));
     }
 
     /**
@@ -57,7 +54,7 @@ class ConfigForm extends Form
     protected function _execute(array $data): bool
     {
         Configure::write($data);
+
         return Configure::dump('Blogger', 'db', array_keys($data));
     }
-
 }

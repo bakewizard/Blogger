@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Model\Entity;
@@ -27,7 +26,6 @@ use Cake\ORM\Entity;
  */
 class Category extends Entity
 {
-
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -51,6 +49,6 @@ class Category extends Entity
         'articles_count' => true,
         'parent_category' => true,
         'child_categories' => true,
-        'articles' => true
+        'articles' => true,
     ];
 }

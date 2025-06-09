@@ -1,18 +1,17 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Model\Table;
 
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Override;
 
 /**
  * ArticlesCategories Model
  *
  * @property &\Cake\ORM\Association\BelongsTo $BloggerArticles
  * @property &\Cake\ORM\Association\BelongsTo $BloggerCategories
- *
  * @method \Blogger\Model\Entity\ArticlesCategory get($primaryKey, $options = [])
  * @method \Blogger\Model\Entity\ArticlesCategory newEntity($data = null, array $options = [])
  * @method \Blogger\Model\Entity\ArticlesCategory[] newEntities(array $data, array $options = [])
@@ -24,14 +23,13 @@ use Cake\ORM\Table;
  */
 class ArticlesCategoriesTable extends Table
 {
-
     /**
      * Initialize method
      *
      * @param array $config The configuration for the Table.
      * @return void
      */
-    #[\Override]
+    #[Override]
     public function initialize(array $config): void
     {
         parent::initialize($config);
@@ -43,16 +41,16 @@ class ArticlesCategoriesTable extends Table
         $this->belongsTo('Articles', [
             'foreignKey' => 'article_id',
             'joinType' => 'INNER',
-            'className' => 'Blogger.Articles'
+            'className' => 'Blogger.Articles',
         ]);
         $this->belongsTo('Categories', [
             'foreignKey' => 'category_id',
             'joinType' => 'INNER',
-            'className' => 'Blogger.Categories'
+            'className' => 'Blogger.Categories',
         ]);
 
         $this->addBehavior('CounterCache', [
-            'Categories' => ['articles_count']
+            'Categories' => ['articles_count'],
         ]);
     }
 
@@ -63,7 +61,7 @@ class ArticlesCategoriesTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    #[\Override]
+    #[Override]
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn(['article_id'], 'Articles'));

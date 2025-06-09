@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Model\Table;
@@ -7,6 +6,7 @@ namespace Blogger\Model\Table;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Override;
 
 /**
  * Comments Model
@@ -15,7 +15,6 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  * @property &\Cake\ORM\Association\BelongsTo $BloggerArticles
  * @property \Blogger\Model\Table\CommentsTable&\Cake\ORM\Association\HasMany $ChildComments
- *
  * @method \Blogger\Model\Entity\Comment get($primaryKey, $options = [])
  * @method \Blogger\Model\Entity\Comment newEntity($data = null, array $options = [])
  * @method \Blogger\Model\Entity\Comment[] newEntities(array $data, array $options = [])
@@ -24,20 +23,18 @@ use Cake\Validation\Validator;
  * @method \Blogger\Model\Entity\Comment patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \Blogger\Model\Entity\Comment[] patchEntities($entities, array $data, array $options = [])
  * @method \Blogger\Model\Entity\Comment findOrCreate($search, callable $callback = null, $options = [])
- *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  * @mixin \Cake\ORM\Behavior\TreeBehavior
  */
 class CommentsTable extends Table
 {
-
     /**
      * Initialize method
      *
      * @param array $config The configuration for the Table.
      * @return void
      */
-    #[\Override]
+    #[Override]
     public function initialize(array $config): void
     {
         parent::initialize($config);
@@ -48,27 +45,27 @@ class CommentsTable extends Table
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
-            'className' => 'Users'
+            'className' => 'Users',
         ]);
         $this->belongsTo('Blogger.Articles', [
             'foreignKey' => 'article_id',
-            'joinType' => 'INNER'
+            'joinType' => 'INNER',
         ]);
         $this->belongsTo('ParentComments', [
             'className' => 'Blogger.Comments',
-            'foreignKey' => 'parent_id'
+            'foreignKey' => 'parent_id',
         ]);
         $this->hasMany('ChildComments', [
             'className' => 'Blogger.Comments',
-            'foreignKey' => 'parent_id'
+            'foreignKey' => 'parent_id',
         ]);
 
         $this->addBehavior('Timestamp');
         $this->addBehavior('Tree', [
-            'level' => 'level'
+            'level' => 'level',
         ]);
         $this->addBehavior('CounterCache', [
-            'Articles' => ['comments_count']
+            'Articles' => ['comments_count'],
         ]);
     }
 
@@ -78,7 +75,7 @@ class CommentsTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    #[\Override]
+    #[Override]
     public function validationDefault(Validator $validator): Validator
     {
         $validator
@@ -119,7 +116,7 @@ class CommentsTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    #[\Override]
+    #[Override]
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn(['parent_id'], 'ParentComments'));

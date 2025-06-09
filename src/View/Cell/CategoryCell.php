@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\View\Cell;
@@ -11,15 +10,14 @@ use App\View\Cell\BlockCell as Cell;
  */
 class CategoryCell extends Cell
 {
-
     /**
      * Articles categories
-     * 
+     *
      * Displays a categories list/tree
      *
      * @return void
      */
-    public function display()
+    public function display(): void
     {
         $showHierarchy = $this->block->params['showHierarchy'] ?? false;
         $model = $this->fetchTable('Blogger.Categories');

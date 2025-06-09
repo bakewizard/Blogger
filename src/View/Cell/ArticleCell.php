@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\View\Cell;
@@ -11,15 +10,14 @@ use App\View\Cell\BlockCell as Cell;
  */
 class ArticleCell extends Cell
 {
-
     /**
      * Recent articles
-     * 
+     *
      * Displays a recent articles list
      *
      * @return void
      */
-    public function recent()
+    public function recent(): void
     {
         $limit = intval($this->block->params['numberOfArticlesToShow'] ?? 5);
 
@@ -34,12 +32,12 @@ class ArticleCell extends Cell
 
     /**
      * Popular (most commented) articles
-     * 
+     *
      * Displays a popular articles list
      *
      * @return void
      */
-    public function popular()
+    public function popular(): void
     {
         $limit = intval($this->block->params['numberOfArticlesToShow'] ?? 5);
 
@@ -54,12 +52,12 @@ class ArticleCell extends Cell
 
     /**
      * Related articles
-     * 
+     *
      * Displays a related (have common tags) articles list
      *
      * @return void
      */
-    public function related()
+    public function related(): void
     {
         $id = intval($this->request->getParam('id')) ?? null;
 

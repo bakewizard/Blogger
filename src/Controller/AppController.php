@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Controller;
@@ -9,7 +8,6 @@ use Cake\Event\EventInterface;
 
 class AppController extends BaseController
 {
-
     /**
      * Before render callback.
      *
@@ -28,5 +26,4 @@ class AppController extends BaseController
 
         parent::beforeRender($event);
     }
-
 }

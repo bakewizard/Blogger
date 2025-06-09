@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\View\Cell;
@@ -11,15 +10,14 @@ use App\View\Cell\BlockCell as Cell;
  */
 class CommentCell extends Cell
 {
-
     /**
      * Recent comments
-     * 
+     *
      * Displays a recent comments list
      *
      * @return void
      */
-    public function display()
+    public function display(): void
     {
         $limit = intval($this->block->params['numberOfCommentsToShow'] ?? 5);
 

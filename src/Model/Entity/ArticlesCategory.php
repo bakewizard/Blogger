@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Model\Entity;
@@ -17,7 +16,6 @@ use Cake\ORM\Entity;
  */
 class ArticlesCategory extends Entity
 {
-
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -29,7 +27,6 @@ class ArticlesCategory extends Entity
      */
     protected array $_accessible = [
         'article' => true,
-        'category' => true
+        'category' => true,
     ];
-
 }

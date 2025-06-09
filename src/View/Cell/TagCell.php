@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\View\Cell;
@@ -11,15 +10,14 @@ use App\View\Cell\BlockCell as Cell;
  */
 class TagCell extends Cell
 {
-
     /**
      * Articles tags
-     * 
+     *
      * Displays a tags list
      *
      * @return void
      */
-    public function display()
+    public function display(): void
     {
         $limit = $this->block->params['numberOfTagsToShow'] ?? 5;
 
@@ -31,5 +29,4 @@ class TagCell extends Cell
 
         $this->set(compact('tags'));
     }
-
 }

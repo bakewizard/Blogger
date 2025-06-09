@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Controller\Admin;
@@ -8,15 +7,13 @@ namespace Blogger\Controller\Admin;
  * Categories Controller
  *
  * @property \Blogger\Model\Table\CategoriesTable $Categories
- *
  * @method \Blogger\Model\Entity\Category[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class CategoriesController extends AppController
 {
-
     /**
      * Categories list
-     * 
+     *
      * Displays a categories list
      *
      * @return \Cake\Http\Response|null
@@ -32,7 +29,7 @@ class CategoriesController extends AppController
 
         if ($categories) {
             $this->set(compact('categories', 'crumbs'));
-        } else if (empty($categories) && is_null($id)) {
+        } elseif (empty($categories) && is_null($id)) {
             $this->set(compact('categories'));
             $this->Flash->error(__('There are not any categories at the moment'));
         } else {
@@ -47,13 +44,13 @@ class CategoriesController extends AppController
      * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view(?string $id = null)
     {
         $category = $this->Categories->get($id, contain: ['Articles' => [
                 'sort' => [
                     'IF(Articles.sort_order = 0, 1, 0)' => 'asc',
-                    'Articles.sort_order' => 'asc'
-                ]
+                    'Articles.sort_order' => 'asc',
+                ],
         ]]);
 
         $crumbs = $this->Categories->find('path', for: $id)->toArray();
@@ -63,9 +60,9 @@ class CategoriesController extends AppController
 
     /**
      * New category
-     * 
+     *
      * Creates a new category
-     * 
+     *
      * @return \Cake\Http\Response|void Redirects on successful add, renders view otherwise.
      */
     public function add()
@@ -75,6 +72,7 @@ class CategoriesController extends AppController
             $category = $this->Categories->patchEntity($category, $this->request->getData());
             if ($this->Categories->save($category)) {
                 $this->Flash->success(__('The category has been saved.'));
+
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The category could not be saved. Please, try again.'));
@@ -91,13 +89,14 @@ class CategoriesController extends AppController
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit(?string $id = null)
     {
         $category = $this->Categories->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $category = $this->Categories->patchEntity($category, $this->request->getData());
             if ($this->Categories->save($category)) {
                 $this->Flash->success(__('The category has been saved.'));
+
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The category could not be saved. Please, try again.'));
@@ -114,7 +113,7 @@ class CategoriesController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete(?string $id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $category = $this->Categories->get($id);
@@ -161,6 +160,7 @@ class CategoriesController extends AppController
             if (!$this->Categories->Articles->save($article)) {
                 $this->Flash->error(__('The Article could not be edited. Please, try again.'));
             }
+
             return $this->redirect($this->referer());
         }
     }

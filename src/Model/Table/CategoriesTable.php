@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Model\Table;
@@ -7,13 +6,13 @@ namespace Blogger\Model\Table;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Override;
 
 /**
  * Categories Model
  *
  * @property \Blogger\Model\Table\CategoriesTable&\Cake\ORM\Association\BelongsTo $ParentBloggerCategories
  * @property \Blogger\Model\Table\CategoriesTable&\Cake\ORM\Association\HasMany $ChildBloggerCategories
- *
  * @method \Blogger\Model\Entity\Category newEmptyEntity()
  * @method \Blogger\Model\Entity\Category newEntity(array $data, array $options = [])
  * @method array<\Blogger\Model\Entity\Category> newEntities(array $data, array $options = [])
@@ -27,19 +26,17 @@ use Cake\Validation\Validator;
  * @method iterable<\Blogger\Model\Entity\BloggerCategory>|\Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Category> saveManyOrFail(iterable $entities, array $options = [])
  * @method iterable<\Blogger\Model\Entity\Category>|\Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Category>|false deleteMany(iterable $entities, array $options = [])
  * @method iterable<\Blogger\Model\Entity\Category>|\Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Category> deleteManyOrFail(iterable $entities, array $options = [])
- *
  * @mixin \Cake\ORM\Behavior\TreeBehavior
  */
 class CategoriesTable extends Table
 {
-
     /**
      * Initialize method
      *
      * @param array $config The configuration for the Table.
      * @return void
      */
-    #[\Override]
+    #[Override]
     public function initialize(array $config): void
     {
         parent::initialize($config);
@@ -50,24 +47,24 @@ class CategoriesTable extends Table
 
         $this->belongsTo('ParentCategories', [
             'className' => 'Blogger.Categories',
-            'foreignKey' => 'parent_id'
+            'foreignKey' => 'parent_id',
         ]);
         $this->hasMany('ChildCategories', [
             'className' => 'Blogger.Categories',
-            'foreignKey' => 'parent_id'
+            'foreignKey' => 'parent_id',
         ]);
 
         $this->belongsToMany('Articles', [
             'foreignKey' => 'category_id',
             'targetForeignKey' => 'article_id',
             'joinTable' => 'blogger_articles_categories',
-            'className' => 'Blogger.Articles'
+            'className' => 'Blogger.Articles',
         ]);
 
         $this->addBehavior('Tree');
         $this->addBehavior('Translate', [
             'fields' => ['name', 'description', 'seo_title', 'seo_description', 'seo_keywords'],
-            'translationTable' => 'BloggerCategoriesI18n'
+            'translationTable' => 'BloggerCategoriesI18n',
         ]);
     }
 
@@ -77,7 +74,7 @@ class CategoriesTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    #[\Override]
+    #[Override]
     public function validationDefault(Validator $validator): Validator
     {
         $validator
@@ -128,7 +125,7 @@ class CategoriesTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    #[\Override]
+    #[Override]
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn(['parent_id'], 'ParentCategories'));

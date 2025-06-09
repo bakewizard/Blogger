@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Model\Entity;
@@ -17,10 +16,8 @@ use Cake\ORM\Entity;
  */
 class ArticlesTag extends Entity
 {
-
     protected array $_accessible = [
         'article' => true,
-        'tag' => true
+        'tag' => true,
     ];
-
 }

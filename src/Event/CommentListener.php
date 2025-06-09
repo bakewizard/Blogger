@@ -1,28 +1,28 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Event;
 
+use ArrayObject;
 use Cake\Core\Configure;
 use Cake\Datasource\EntityInterface;
 use Cake\Datasource\FactoryLocator;
 use Cake\Event\EventInterface;
 use Cake\Event\EventListenerInterface;
 use Cake\Mailer\Mailer;
+use Override;
 
 class CommentListener implements EventListenerInterface
 {
-
-    #[\Override]
+    #[Override]
     public function implementedEvents(): array
     {
         return [
-            'Model.afterSave' => 'onAfterSave'
+            'Model.afterSave' => 'onAfterSave',
         ];
     }
 
-    public function onAfterSave(EventInterface $event, EntityInterface $entity, \ArrayObject $options)
+    public function onAfterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
     {
         $config = Configure::read('Blogger');
 
@@ -31,7 +31,7 @@ class CommentListener implements EventListenerInterface
         }
     }
 
-    private function sendNotifyMail($entity)
+    private function sendNotifyMail($entity): void
     {
         $email = new Mailer();
 

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Controller\Admin;
@@ -11,10 +10,9 @@ namespace Blogger\Controller\Admin;
  */
 class ArticlesController extends AppController
 {
-
     /**
      * Articles list
-     * 
+     *
      * Displays an articles list
      *
      * @return \Cake\Http\Response|null
@@ -36,7 +34,7 @@ class ArticlesController extends AppController
      * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view(?string $id = null)
     {
         $article = $this->Articles->get($id);
 
@@ -45,7 +43,7 @@ class ArticlesController extends AppController
 
     /**
      * New article
-     * 
+     *
      * Creates a new article
      *
      * @return \Cake\Http\Response|void Redirects on successful add, renders view otherwise.
@@ -58,6 +56,7 @@ class ArticlesController extends AppController
             $article->author_id = $this->Authentication->getIdentityData('id');
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('The article has been saved.'));
+
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The article could not be saved. Please, try again.'));
@@ -76,7 +75,7 @@ class ArticlesController extends AppController
      * @return \Cake\Http\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit(?string $id = null)
     {
         $article = $this->Articles->get($id, contain: ['Categories', 'Tags']);
 
@@ -84,6 +83,7 @@ class ArticlesController extends AppController
             $article = $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('The article has been saved.'));
+
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The article could not be saved. Please, try again.'));
@@ -103,7 +103,7 @@ class ArticlesController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete(?string $id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $article = $this->Articles->get($id);
@@ -112,6 +112,7 @@ class ArticlesController extends AppController
         } else {
             $this->Flash->error(__('The article could not be deleted. Please, try again.'));
         }
+
         return $this->redirect(['action' => 'index']);
     }
 }

@@ -1,30 +1,29 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Controller\Admin;
 
+use Override;
+
 class DashboardController extends AppController
 {
-
     /**
      * Plugin dashboard
-     * 
+     *
      * Displays the plugin dashboard
      */
     public function index()
     {
-        
     }
 
     /**
      * Plugin settings
-     * 
+     *
      * Displays/Sets the plugin settings
      *
      * @return \Cake\Http\Response|null
      */
-    #[\Override]
+    #[Override]
     public function settings()
     {
         parent::settings();

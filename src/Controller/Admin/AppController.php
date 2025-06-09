@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Controller\Admin;
@@ -9,7 +8,6 @@ use Cake\Event\EventInterface;
 
 class AppController extends BaseController
 {
-
     /**
      * Before filter callback.
      *
@@ -29,5 +27,4 @@ class AppController extends BaseController
             $this->Authorization->authorize($article);
         }
     }
-
 }

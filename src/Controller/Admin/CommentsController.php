@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Blogger\Controller\Admin;
@@ -8,15 +7,13 @@ namespace Blogger\Controller\Admin;
  * Comments Controller
  *
  * @property \Blogger\Model\Table\CommentsTable $Comments
- *
  * @method \Blogger\Model\Entity\Comment[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class CommentsController extends AppController
 {
-
     /**
      * Comments list
-     * 
+     *
      * Displays a comments list
      *
      * @return \Cake\Http\Response|null
@@ -39,7 +36,7 @@ class CommentsController extends AppController
      * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view(?string $id = null)
     {
         $comment = $this->Comments->get($id, contain: ['Users', 'Articles', 'ParentComments', 'ChildComments' => ['Users', 'Articles']]);
 
@@ -53,7 +50,7 @@ class CommentsController extends AppController
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit(?string $id = null)
     {
         $comment = $this->Comments->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -76,7 +73,7 @@ class CommentsController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete(?string $id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $comment = $this->Comments->get($id);
