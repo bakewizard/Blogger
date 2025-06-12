@@ -7,6 +7,7 @@ use Cake\Core\Configure;
 use Cake\Database\Expression\QueryExpression;
 use Cake\Database\Query;
 use Cake\Utility\Hash;
+use Override;
 
 /**
  * Articles Controller
@@ -21,6 +22,10 @@ class ArticlesController extends AppController
         ],
     ];
 
+    /**
+     * @inheritDoc
+     */
+    #[Override]
     public function initialize(): void
     {
         parent::initialize();
@@ -32,7 +37,7 @@ class ArticlesController extends AppController
      *
      * Displays an articles list
      *
-     * @return \Cake\Http\Response|null
+     * @return \Cake\Http\Response|void
      */
     public function index()
     {
@@ -41,6 +46,13 @@ class ArticlesController extends AppController
         $this->set(compact('articles'));
     }
 
+    /**
+     * Search articles
+     *
+     * Displays a list of articles based on search criteria
+     *
+     * @return \Cake\Http\Response|void
+     */
     public function search()
     {
         $query = $this->Articles->find('published')
@@ -61,7 +73,7 @@ class ArticlesController extends AppController
      *
      * @items Articles
      * @param string|null $id Article id.
-     * @return \Cake\Http\Response|null
+     * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view(?string $id = null)
@@ -75,7 +87,15 @@ class ArticlesController extends AppController
         $this->set('article', $article);
     }
 
-    public function category($id)
+    /**
+     * Category articles
+     *
+     * Displays a list of articles in a specific category
+     *
+     * @param int $id Category id.
+     * @return \Cake\Http\Response|void
+     */
+    public function category(int $id)
     {
         $categories = $this->Articles->Categories
                 ->find('children', for: $id)
@@ -99,7 +119,15 @@ class ArticlesController extends AppController
         $this->render('index');
     }
 
-    public function tag($alias = null)
+    /**
+     * Tag articles
+     *
+     * Displays a list of articles with a specific tag
+     *
+     * @param string|null $alias Tag alias.
+     * @return \Cake\Http\Response|void
+     */
+    public function tag(?string $alias = null)
     {
         $query = $this->Articles->find('published')
                 ->contain(['Users'])
@@ -114,7 +142,15 @@ class ArticlesController extends AppController
         $this->render('index');
     }
 
-    public function user($id = null)
+    /**
+     * User articles
+     *
+     * Displays a list of articles by a specific user
+     *
+     * @param int|null $id User id.
+     * @return \Cake\Http\Response|void
+     */
+    public function user(?int $id = null)
     {
         $query = $this->Articles->find('published')
                 ->contain(['Users'])
@@ -129,19 +165,29 @@ class ArticlesController extends AppController
         $this->render('index');
     }
 
-    public function archive($year, $month = false, $day = false)
+    /**
+     * Archive articles
+     *
+     * Displays a list of articles from a specific year, month, and day
+     *
+     * @param int $year Year.
+     * @param int|false $month Month.
+     * @param int|false $day Day.
+     * @return \Cake\Http\Response|void
+     */
+    public function archive(int $year, int|false $month = false, int|false $day = false)
     {
         $query = $this->Articles->find('published')
                 ->contain(['Users'])
                 ->where(function (QueryExpression $exp, Query $q) use ($year, $month, $day) {
-                    $exp = $exp->eq($q->func()->year(['Articles.created' => 'identifier']), $year);
+                    $exp = $exp->eq($q->func()->extract('YEAR', $q->identifier('Articles.created')), $year);
 
                     if ($month) {
-                        $exp = $exp->eq($q->func()->month(['Articles.created' => 'identifier']), $month);
+                        $exp = $exp->eq($q->func()->extract('MONTH', $q->identifier('Articles.created')), $month);
                     }
 
                     if ($day) {
-                        $exp = $exp->eq($q->func()->day(['Articles.created' => 'identifier']), $day);
+                        $exp = $exp->eq($q->func()->extract('DAY', $q->identifier('Articles.created')), $day);
                     }
 
                     return $exp;
@@ -154,6 +200,13 @@ class ArticlesController extends AppController
         $this->render('index');
     }
 
+    /**
+     * Add comment
+     *
+     * Adds a comment to an article
+     *
+     * @return \Cake\Http\Response|void Redirects on successful add, renders view otherwise.
+     */
     public function addComment()
     {
         $config = Configure::read('Blogger');

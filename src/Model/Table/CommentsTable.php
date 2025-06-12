@@ -9,22 +9,27 @@ use Cake\Validation\Validator;
 use Override;
 
 /**
- * Comments Model
- *
- * @property \Blogger\Model\Table\CommentsTable&\Cake\ORM\Association\BelongsTo $ParentComments
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
- * @property &\Cake\ORM\Association\BelongsTo $BloggerArticles
+ * @property \Blogger\Model\Table\ArticlesTable&\Cake\ORM\Association\BelongsTo $Articles
+ * @property \Blogger\Model\Table\CommentsTable&\Cake\ORM\Association\BelongsTo $ParentComments
  * @property \Blogger\Model\Table\CommentsTable&\Cake\ORM\Association\HasMany $ChildComments
- * @method \Blogger\Model\Entity\Comment get($primaryKey, $options = [])
- * @method \Blogger\Model\Entity\Comment newEntity($data = null, array $options = [])
- * @method \Blogger\Model\Entity\Comment[] newEntities(array $data, array $options = [])
- * @method \Blogger\Model\Entity\Comment|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \Blogger\Model\Entity\Comment saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Blogger\Model\Entity\Comment newEmptyEntity()
+ * @method \Blogger\Model\Entity\Comment newEntity(array $data, array $options = [])
+ * @method array<\Blogger\Model\Entity\Comment> newEntities(array $data, array $options = [])
+ * @method \Blogger\Model\Entity\Comment get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
+ * @method \Blogger\Model\Entity\Comment findOrCreate(\Cake\ORM\Query\SelectQuery|callable|array $search, ?callable $callback = null, array $options = [])
  * @method \Blogger\Model\Entity\Comment patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Blogger\Model\Entity\Comment[] patchEntities($entities, array $data, array $options = [])
- * @method \Blogger\Model\Entity\Comment findOrCreate($search, callable $callback = null, $options = [])
+ * @method array<\Blogger\Model\Entity\Comment> patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \Blogger\Model\Entity\Comment|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
+ * @method \Blogger\Model\Entity\Comment saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Comment>|false saveMany(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Comment> saveManyOrFail(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Comment>|false deleteMany(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Comment> deleteManyOrFail(iterable $entities, array $options = [])
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  * @mixin \Cake\ORM\Behavior\TreeBehavior
+ * @mixin \Cake\ORM\Behavior\CounterCacheBehavior
+ * @extends \Cake\ORM\Table<array{CounterCache: \Cake\ORM\Behavior\CounterCacheBehavior, Timestamp: \Cake\ORM\Behavior\TimestampBehavior, Tree: \Cake\ORM\Behavior\TreeBehavior}>
  */
 class CommentsTable extends Table
 {

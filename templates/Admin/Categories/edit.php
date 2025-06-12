@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var array $config
+ * @var mixed $parentCategories
+ * @var \Blogger\Model\Entity\Category $category
+ */
+?>
 <?= $this->Html->script(['/backend/plugins/tinymce/tinymce.min', 'Blogger.backend/categories/category'], ['block' => true]); ?>
 <div class="card card-success card-outline">
     <div class="card-header">

@@ -3,12 +3,16 @@ declare(strict_types=1);
 
 namespace Blogger\View\Helper;
 
+use Cake\Http\ServerRequest;
 use Cake\I18n\Date;
 use Cake\View\Helper;
+use Override;
 use const CAL_GREGORIAN;
 
 /**
  * Calendar helper
+ *
+ * @property \Cake\View\Helper\HtmlHelper $Html
  */
 class CalendarHelper extends Helper
 {
@@ -18,21 +22,23 @@ class CalendarHelper extends Helper
      * @var array
      */
     public array $helpers = ['Html'];
-    protected $request;
-    protected $date;
+    protected ServerRequest $request;
+    protected Date $date;
 
     /**
-     * Default configuration.
-     *
-     * @var array
+     * @inheritDoc
      */
     protected array $_defaultConfig = [];
-    private $currentYear;
-    private $currentMonth;
-    private $currentDay;
-    private $daysInMonth;
-    private $firstDayOfTheWeek;
+    private int $currentYear;
+    private int $currentMonth;
+    private int $currentDay;
+    private int $daysInMonth;
+    private int $firstDayOfTheWeek;
 
+    /**
+     * @inheritDoc
+     */
+    #[Override]
     public function initialize(array $config): void
     {
         $this->request = $this->getView()->getRequest();
@@ -42,14 +48,17 @@ class CalendarHelper extends Helper
         $this->currentMonth = intval($this->request->getParam('month', date('m')));
         $this->currentDay = intval($this->request->getParam('day', date('d')));
         $this->daysInMonth = intval(cal_days_in_month(CAL_GREGORIAN, $this->currentMonth, $this->currentYear));
-        $this->firstDayOfTheWeek = intval(date('N', strtotime($this->currentYear . '-' . $this->currentMonth . '-01')));
+        $this->firstDayOfTheWeek = intval(date('N', (int)strtotime($this->currentYear . '-' . $this->currentMonth . '-01')));
         $this->date->setDate($this->currentYear, $this->currentMonth, $this->currentDay);
     }
 
     /**
-     * Displays the calendar
+     * Renders the calendar for the current month.
+     *
+     * @param array|null $days An associative array where keys are days of the month and values are data for those days.
+     * @return string The HTML content of the calendar.
      */
-    public function render($days = null): string
+    public function render(?array $days = null): string
     {
         $content = '<div id="archives-calendar">';
         $content .= $this->createNavigation();
@@ -74,8 +83,10 @@ class CalendarHelper extends Helper
                             'plugin' => 'Blogger',
                             'controller' => 'Articles',
                             'action' => 'archive',
-                            $this->currentYear, $monthPadded, $dayPadded,
-                                ], ['class' => 'text-primary fw-bold']);
+                            $this->currentYear,
+                            $monthPadded,
+                            $dayPadded,
+                        ], ['class' => 'text-primary fw-bold']);
                     } else {
                         $content .= $day;
                     }
@@ -94,6 +105,11 @@ class CalendarHelper extends Helper
         return $content;
     }
 
+    /**
+     * Creates the navigation for the calendar.
+     *
+     * @return string The HTML content of the navigation.
+     */
     protected function createNavigation(): string
     {
         $nextMonth = $this->currentMonth == 12 ? 1 : $this->currentMonth + 1;
@@ -102,32 +118,45 @@ class CalendarHelper extends Helper
         $prevYear = $this->currentMonth == 1 ? $this->currentYear - 1 : $this->currentYear;
 
         return '<div class="py-1 d-flex justify-content-between">' .
-                $this->Html->link('<i class="bi bi-chevron-double-left"></i>', [
-                    'plugin' => 'Blogger',
-                    'controller' => 'Articles',
-                    'action' => 'archive', $prevYear, sprintf('%02d', $prevMonth),
-                        ], ['escape' => false, 'class' => 'btn btn-sm']) .
-                $this->Html->link('<i class="bi bi-chevron-left"></i>', [
-                    'plugin' => 'Blogger',
-                    'controller' => 'Articles',
-                    'action' => 'archive', $this->currentYear - 1, sprintf('%02d', $this->currentMonth),
-                        ], ['escape' => false, 'class' => 'btn btn-sm']) .
-                '<div class="fw-bold">' .
-                mb_convert_case($this->date->i18nFormat('LLLL'), MB_CASE_TITLE, 'UTF-8') . ' ' . $this->currentYear .
-                '</div>' .
-                $this->Html->link('<i class="bi bi-chevron-right"></i>', [
-                    'plugin' => 'Blogger',
-                    'controller' => 'Articles',
-                    'action' => 'archive', $this->currentYear + 1, sprintf('%02d', $this->currentMonth),
-                        ], ['escape' => false, 'class' => 'btn btn-sm']) .
-                $this->Html->link('<i class="bi bi-chevron-double-right"></i>', [
-                    'plugin' => 'Blogger',
-                    'controller' => 'Articles',
-                    'action' => 'archive', $nextYear, sprintf('%02d', $nextMonth),
-                        ], ['escape' => false, 'class' => 'btn btn-sm']) .
-                '</div>';
+            $this->Html->link('<i class="bi bi-chevron-double-left"></i>', [
+                'plugin' => 'Blogger',
+                'controller' => 'Articles',
+                'action' => 'archive',
+                $prevYear,
+                sprintf('%02d', $prevMonth),
+            ], ['escape' => false, 'class' => 'btn btn-sm']) .
+            $this->Html->link('<i class="bi bi-chevron-left"></i>', [
+                'plugin' => 'Blogger',
+                'controller' => 'Articles',
+                'action' => 'archive',
+                $this->currentYear - 1,
+                sprintf('%02d', $this->currentMonth),
+            ], ['escape' => false, 'class' => 'btn btn-sm']) .
+            '<div class="fw-bold">' .
+            mb_convert_case((string)$this->date->i18nFormat('LLLL'), MB_CASE_TITLE, 'UTF-8') . ' ' . $this->currentYear .
+            '</div>' .
+            $this->Html->link('<i class="bi bi-chevron-right"></i>', [
+                'plugin' => 'Blogger',
+                'controller' => 'Articles',
+                'action' => 'archive',
+                $this->currentYear + 1,
+                sprintf('%02d', $this->currentMonth),
+            ], ['escape' => false, 'class' => 'btn btn-sm']) .
+            $this->Html->link('<i class="bi bi-chevron-double-right"></i>', [
+                'plugin' => 'Blogger',
+                'controller' => 'Articles',
+                'action' => 'archive',
+                $nextYear,
+                sprintf('%02d', $nextMonth),
+            ], ['escape' => false, 'class' => 'btn btn-sm']) .
+            '</div>';
     }
 
+    /**
+     * Creates the header for the calendar table.
+     *
+     * @return string The HTML content of the header.
+     */
     protected function createHeader(): string
     {
         $dow = [];
@@ -140,13 +169,15 @@ class CalendarHelper extends Helper
     }
 
     /**
-     * Calculate a number of weeks in a particular month
+     * Calculates the number of weeks in the current month.
+     *
+     * @return int The number of weeks in the month.
      */
     private function getWeeksInMonth(): int
     {
         $numOfweeks = ($this->daysInMonth % 7 == 0 ? 0 : 1) + intval($this->daysInMonth / 7);
-        $monthEndingDay = date('N', strtotime($this->currentYear . '-' . $this->currentMonth . '-' . $this->daysInMonth));
-        $monthStartDay = date('N', strtotime($this->currentYear . '-' . $this->currentMonth . '-01'));
+        $monthEndingDay = date('N', (int)strtotime($this->currentYear . '-' . $this->currentMonth . '-' . $this->daysInMonth));
+        $monthStartDay = date('N', (int)strtotime($this->currentYear . '-' . $this->currentMonth . '-01'));
 
         if ($monthEndingDay < $monthStartDay) {
             $numOfweeks++;

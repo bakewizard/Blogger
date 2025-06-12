@@ -7,7 +7,10 @@ namespace Blogger\Controller\Admin;
  * Tags Controller
  *
  * @property \Blogger\Model\Table\TagsTable $Tags
- * @method \Blogger\Model\Entity\Tag[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Tag> paginate(\Cake\Datasource\RepositoryInterface|\Cake\Datasource\QueryInterface|string|null $object = null, array $settings = [])
+ * @property \Search\Controller\Component\SearchComponent $Search
+ * @property \Authentication\Controller\Component\AuthenticationComponent $Authentication
+ * @property \Authorization\Controller\Component\AuthorizationComponent $Authorization
  */
 class TagsController extends AppController
 {
@@ -16,7 +19,7 @@ class TagsController extends AppController
      *
      * Displays a tags list
      *
-     * @return \Cake\Http\Response|null
+     * @return \Cake\Http\Response|void
      */
     public function index()
     {
@@ -30,7 +33,7 @@ class TagsController extends AppController
      *
      * Creates a new tag
      *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     * @return \Cake\Http\Response|void Redirects on successful add, renders view otherwise.
      */
     public function add()
     {
@@ -52,7 +55,7 @@ class TagsController extends AppController
      * Edit method
      *
      * @param string|null $id Tag id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @return \Cake\Http\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit(?string $id = null)

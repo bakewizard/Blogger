@@ -11,15 +11,23 @@ use Override;
 /**
  * Tags Model
  *
- * @property \Blogger\Model\Table\ArticlesTable|\Cake\ORM\Association\BelongsToMany $Articles
- * @method \Blogger\Model\Entity\Tag get($primaryKey, $options = [])
- * @method \Blogger\Model\Entity\Tag newEntity($data = null, array $options = [])
- * @method \Blogger\Model\Entity\Tag[] newEntities(array $data, array $options = [])
- * @method \Blogger\Model\Entity\Tag|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \Blogger\Model\Entity\Tag saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @property \Blogger\Model\Table\ArticlesTable&\Cake\ORM\Association\BelongsToMany $Articles
+ * @method \Blogger\Model\Entity\Tag get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
+ * @method \Blogger\Model\Entity\Tag newEntity(array $data, array $options = [])
+ * @method array<\Blogger\Model\Entity\Tag> newEntities(array $data, array $options = [])
+ * @method \Blogger\Model\Entity\Tag|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
+ * @method \Blogger\Model\Entity\Tag saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
  * @method \Blogger\Model\Entity\Tag patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Blogger\Model\Entity\Tag[] patchEntities($entities, array $data, array $options = [])
- * @method \Blogger\Model\Entity\Tag findOrCreate($search, callable $callback = null, $options = [])
+ * @method array<\Blogger\Model\Entity\Tag> patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \Blogger\Model\Entity\Tag findOrCreate(\Cake\ORM\Query\SelectQuery|callable|array $search, ?callable $callback = null, array $options = [])
+ * @property \Cake\ORM\Table&\Cake\ORM\Association\HasMany $BloggerTagsI18n
+ * @method \Blogger\Model\Entity\Tag newEmptyEntity()
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Tag>|false saveMany(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Tag> saveManyOrFail(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Tag>|false deleteMany(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Tag> deleteManyOrFail(iterable $entities, array $options = [])
+ * @mixin \Cake\ORM\Behavior\TranslateBehavior
+ * @extends \Cake\ORM\Table<array{Translate: \Cake\ORM\Behavior\TranslateBehavior}>
  */
 class TagsTable extends Table
 {

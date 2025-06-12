@@ -13,6 +13,7 @@ use Cake\ORM\Entity;
  *
  * @property \Blogger\Model\Entity\Article $article
  * @property \Blogger\Model\Entity\Tag $tag
+ * @property \Cake\ORM\Entity $tags_join
  */
 class ArticlesTag extends Entity
 {

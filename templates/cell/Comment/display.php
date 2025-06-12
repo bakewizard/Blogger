@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var object $block
+ * @var array<\Blogger\Model\Entity\Comment>|\Cake\Collection\CollectionInterface<\Blogger\Model\Entity\Comment> $comments
+ */
+?>
 <div class="card mb-2">
     <h5 class="card-header">
         <?= $block->title ?>

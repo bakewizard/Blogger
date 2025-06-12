@@ -13,17 +13,30 @@ use Cake\Utility\Text;
  * @property string $title
  * @property string|null $alias
  *
- * @property \Blogger\Model\Entity\Article[] $articles
+ * @property array<\Blogger\Model\Entity\Article> $articles
+ * @property int $articles_count
+ * @property \Cake\ORM\Entity $_joinData
+ * @property array<\Cake\ORM\Entity> $_i18n
  */
 class Tag extends Entity
 {
+    /**
+     * @inheritDoc
+     */
     protected array $_accessible = [
         'title' => true,
         'alias' => true,
         'articles' => true,
     ];
 
-    protected function _setAlias($alias)
+    /**
+     * Sets the alias attribute after converting it to a URL-friendly slug in lowercase.
+     *
+     * @param string $alias The alias value to be set.
+     * @return string The processed alias, slugged and in lowercase.
+     * @see \Blogger\Model\Entity\Tag::$alias
+     */
+    protected function _setAlias(string $alias): string
     {
         return strtolower(Text::slug($alias));
     }

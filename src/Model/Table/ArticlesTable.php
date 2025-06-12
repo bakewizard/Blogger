@@ -14,23 +14,33 @@ use Search\Manager;
  * Articles Model
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
- * @method \Blogger\Model\Entity\Article get($primaryKey, $options = [])
- * @method \Blogger\Model\Entity\Article newEntity($data = null, array $options = [])
- * @method \Blogger\Model\Entity\Article[] newEntities(array $data, array $options = [])
- * @method \Blogger\Model\Entity\Article|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \Blogger\Model\Entity\Article saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Blogger\Model\Entity\Article get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
+ * @method \Blogger\Model\Entity\Article newEntity(array $data, array $options = [])
+ * @method array<\Blogger\Model\Entity\Article> newEntities(array $data, array $options = [])
+ * @method \Blogger\Model\Entity\Article|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
+ * @method \Blogger\Model\Entity\Article saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
  * @method \Blogger\Model\Entity\Article patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Blogger\Model\Entity\Article[] patchEntities($entities, array $data, array $options = [])
- * @method \Blogger\Model\Entity\Article findOrCreate($search, callable $callback = null, $options = [])
+ * @method array<\Blogger\Model\Entity\Article> patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \Blogger\Model\Entity\Article findOrCreate(\Cake\ORM\Query\SelectQuery|callable|array $search, ?callable $callback = null, array $options = [])
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
+ * @property \Blogger\Model\Table\CategoriesTable&\Cake\ORM\Association\BelongsToMany $Categories
+ * @property \Blogger\Model\Table\TagsTable&\Cake\ORM\Association\BelongsToMany $Tags
+ * @property \Blogger\Model\Table\CommentsTable&\Cake\ORM\Association\HasMany $Comments
+ * @property \Blogger\Model\Table\CommentsTable&\Cake\ORM\Association\HasMany $ApprovedComments
+ * @property \Cake\ORM\Table&\Cake\ORM\Association\HasMany $BloggerArticlesI18n
+ * @method \Blogger\Model\Entity\Article newEmptyEntity()
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Article>|false saveMany(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Article> saveManyOrFail(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Article>|false deleteMany(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Article> deleteManyOrFail(iterable $entities, array $options = [])
+ * @mixin \Search\Model\Behavior\SearchBehavior
+ * @mixin \Cake\ORM\Behavior\TranslateBehavior
+ * @extends \Cake\ORM\Table<array{Search: \Search\Model\Behavior\SearchBehavior, Timestamp: \Cake\ORM\Behavior\TimestampBehavior, Translate: \Cake\ORM\Behavior\TranslateBehavior}>
  */
 class ArticlesTable extends Table
 {
     /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
+     * @inheritDoc
      */
     #[Override]
     public function initialize(array $config): void
@@ -80,11 +90,19 @@ class ArticlesTable extends Table
     }
 
     /**
+     * Returns a search manager instance for the Articles model.
+     *
+     * This method configures the search manager to allow searching by title,
+     * created date range, published status, and full-text search on title and body.
+     *
      * @return \Search\Manager
      */
     public function searchManager(): Manager
     {
-        $searchManager = $this->behaviors()->Search->searchManager();
+        /** @var \Search\Model\Behavior\SearchBehavior $search */
+        $search = $this->getBehavior('Search');
+        $searchManager = $search->searchManager();
+
         $searchManager
                 ->useCollection('backend')
                 ->like('title', ['before' => true, 'after' => true])
@@ -179,12 +197,25 @@ class ArticlesTable extends Table
         return $rules;
     }
 
-    public function findPublished(SelectQuery $query)
+    /**
+     * Finds articles that are published.
+     *
+     * @param \Cake\ORM\Query\SelectQuery $query The query to modify.
+     * @return \Cake\ORM\Query\SelectQuery
+     */
+    public function findPublished(SelectQuery $query): SelectQuery
     {
         return $query->where(['published' => true]);
     }
 
-    public function findRelated(SelectQuery $query, ?int $id)
+    /**
+     * Finds articles related to a specific article by tags.
+     *
+     * @param \Cake\ORM\Query\SelectQuery $query The query to modify.
+     * @param int|null $id The ID of the article to find related articles for.
+     * @return \Cake\ORM\Query\SelectQuery
+     */
+    public function findRelated(SelectQuery $query, ?int $id): SelectQuery
     {
         $subQuery = $this->Tags
                 ->find()
@@ -199,11 +230,18 @@ class ArticlesTable extends Table
                             return $q->where(['tag_id IN' => $subQuery]);
                         })
                         ->where(['article_id !=' => $id])
-                        ->group('article_id')
+                        ->groupBy('article_id')
                         ->orderByDesc('tags_count');
     }
 
-    public function findComments(SelectQuery $query, string $sorting = 'desc')
+    /**
+     * Finds comments for an article, ordered by creation date.
+     *
+     * @param \Cake\ORM\Query\SelectQuery $query The query to modify.
+     * @param string $sorting The sorting order, either 'asc' or 'desc'.
+     * @return \Cake\ORM\Query\SelectQuery
+     */
+    public function findComments(SelectQuery $query, string $sorting = 'desc'): SelectQuery
     {
         return $query->contain([
                     'Comments' => function (SelectQuery $q) use ($sorting) {

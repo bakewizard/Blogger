@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var mixed $settings
+ */
+?>
 <?php $this->assign('page', __('Blog Settings')); ?>
 <div class="card card-success card-outline card-tabs">
     <div class="card-header p-0 pt-1 border-bottom-0">

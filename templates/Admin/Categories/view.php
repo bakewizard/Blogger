@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var mixed $crumbs
+ * @var \Blogger\Model\Entity\Category $category
+ */
+?>
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">

@@ -23,10 +23,10 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\DateTime|null $created
  * @property \Cake\I18n\DateTime|null $modified
  *
- * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\User|null $user
  * @property \Blogger\Model\Entity\Article $article
- * @property \Blogger\Model\Entity\Comment $parent_comment
- * @property \Blogger\Model\Entity\Comment[] $child_comments
+ * @property \Blogger\Model\Entity\Comment|null $parent_comment
+ * @property array<\Blogger\Model\Entity\Comment> $child_comments
  */
 class Comment extends Entity
 {

@@ -59,7 +59,8 @@ class ArticleCell extends Cell
      */
     public function related(): void
     {
-        $id = intval($this->request->getParam('id')) ?? null;
+        $idParam = $this->request->getParam('id');
+        $id = $idParam !== null ? intval($idParam) : null;
 
         $limit = intval($this->block->params['numberOfArticlesToShow'] ?? 5);
 

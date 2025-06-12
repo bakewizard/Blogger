@@ -7,6 +7,9 @@ namespace Blogger\Controller\Admin;
  * Articles Controller
  *
  * @property \Blogger\Model\Table\ArticlesTable $Articles
+ * @property \Search\Controller\Component\SearchComponent $Search
+ * @property \Authentication\Controller\Component\AuthenticationComponent $Authentication
+ * @property \Authorization\Controller\Component\AuthorizationComponent $Authorization
  */
 class ArticlesController extends AppController
 {
@@ -15,7 +18,7 @@ class ArticlesController extends AppController
      *
      * Displays an articles list
      *
-     * @return \Cake\Http\Response|null
+     * @return \Cake\Http\Response|void
      */
     public function index()
     {
@@ -31,7 +34,7 @@ class ArticlesController extends AppController
      * View method
      *
      * @param string|null $id Article id.
-     * @return \Cake\Http\Response|null
+     * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view(?string $id = null)

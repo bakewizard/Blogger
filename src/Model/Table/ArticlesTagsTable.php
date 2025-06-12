@@ -12,14 +12,22 @@ use Override;
  *
  * @property \Blogger\Model\Table\ArticlesTable&\Cake\ORM\Association\BelongsTo $Articles
  * @property \Blogger\Model\Table\TagsTable&\Cake\ORM\Association\BelongsTo $Tags
- * @method \Blogger\Model\Entity\ArticlesTag get($primaryKey, $options = [])
- * @method \Blogger\Model\Entity\ArticlesTag newEntity($data = null, array $options = [])
- * @method \Blogger\Model\Entity\ArticlesTag[] newEntities(array $data, array $options = [])
- * @method \Blogger\Model\Entity\ArticlesTag|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \Blogger\Model\Entity\ArticlesTag saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Blogger\Model\Entity\ArticlesTag get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
+ * @method \Blogger\Model\Entity\ArticlesTag newEntity(array $data, array $options = [])
+ * @method array<\Blogger\Model\Entity\ArticlesTag> newEntities(array $data, array $options = [])
+ * @method \Blogger\Model\Entity\ArticlesTag|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
+ * @method \Blogger\Model\Entity\ArticlesTag saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
  * @method \Blogger\Model\Entity\ArticlesTag patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Blogger\Model\Entity\ArticlesTag[] patchEntities($entities, array $data, array $options = [])
- * @method \Blogger\Model\Entity\ArticlesTag findOrCreate($search, callable $callback = null, $options = [])
+ * @method array<\Blogger\Model\Entity\ArticlesTag> patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \Blogger\Model\Entity\ArticlesTag findOrCreate(\Cake\ORM\Query\SelectQuery|callable|array $search, ?callable $callback = null, array $options = [])
+ * @property \Cake\ORM\Table&\Cake\ORM\Association\BelongsTo $TagsJoin
+ * @method \Blogger\Model\Entity\ArticlesTag newEmptyEntity()
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\ArticlesTag>|false saveMany(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\ArticlesTag> saveManyOrFail(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\ArticlesTag>|false deleteMany(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\ArticlesTag> deleteManyOrFail(iterable $entities, array $options = [])
+ * @mixin \Cake\ORM\Behavior\CounterCacheBehavior
+ * @extends \Cake\ORM\Table<array{CounterCache: \Cake\ORM\Behavior\CounterCacheBehavior}>
  */
 class ArticlesTagsTable extends Table
 {

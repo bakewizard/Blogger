@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var \App\View\AppView $this
+ * @var mixed $crumbs
+ */
 $stack = '';
 $crumbsCount = count($crumbs);
 $lastIdx = $crumbsCount - 1;

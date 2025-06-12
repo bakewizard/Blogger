@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var object $block
+ * @var mixed $days
+ */
+?>
 <div class="card mb-2">
     <h5 class="card-header">
         <?= $block->title ?>

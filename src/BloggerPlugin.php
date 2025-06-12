@@ -44,7 +44,7 @@ class BloggerPlugin extends CmsPlugin
         parent::routes($routes);
 
         $routes->prefix('Admin', function (RouteBuilder $builder): void {
-            $builder->plugin($this->name, function (RouteBuilder $builder): void {
+            $builder->plugin($this->name ?? 'Blogger', function (RouteBuilder $builder): void {
                 $builder->applyMiddleware('auth');
                 $builder->connect('/', ['controller' => 'Dashboard']);
                 $builder->fallbacks(DashedRoute::class);

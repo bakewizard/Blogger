@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var array $config
+ * @var \Blogger\Model\Entity\Article $article
+ */
+?>
 <?php $this->assign('title', $article->seo_title); ?>
 <?= $this->Html->meta('description', $article->seo_description, ['block' => true]); ?>
 <?= $this->Html->meta('keywords', $article->seo_keywords, ['block' => true]); ?>

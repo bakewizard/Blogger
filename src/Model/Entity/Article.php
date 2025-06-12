@@ -23,19 +23,19 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\DateTime|null $modified
  *
  * @property \App\Model\Entity\User $user
- * @property \Blogger\Model\Entity\Category[] $categories
- * @property \Blogger\Model\Entity\Tag[] $tags
+ * @property array<\Blogger\Model\Entity\Category> $categories
+ * @property array<\Blogger\Model\Entity\Tag> $tags
+ * @property int $comments_count
+ * @property string $tag_string
+ * @property \Blogger\Model\Entity\ArticlesTag $_joinData
+ * @property array<\Blogger\Model\Entity\Comment> $comments
+ * @property array<\Blogger\Model\Entity\Comment> $approved_comments
+ * @property array<\Cake\ORM\Entity> $_i18n
  */
 class Article extends Entity
 {
     /**
-     * Fields that can be mass assigned using newEntity() or patchEntity().
-     *
-     * Note that when '*' is set to true, this allows all unspecified fields to
-     * be mass assigned. For security purposes, it is advised to set '*' to false
-     * (or remove it), and explicitly make individual fields accessible as needed.
-     *
-     * @var array
+     * @inheritDoc
      */
     protected array $_accessible = [
         'author_id' => true,
@@ -56,7 +56,17 @@ class Article extends Entity
         'tag_string' => true,
     ];
 
-    protected function _getTagString()
+    /**
+     * Returns a comma-separated string of tag titles associated with the article.
+     *
+     * If the 'tag_string' field is already set, it returns its value.
+     * If there are no tags, it returns an empty string.
+     * Otherwise, it concatenates the titles of all tags, separated by commas.
+     *
+     * @return string Comma-separated list of tag titles.
+     * @see \Blogger\Model\Entity\Article::$tag_string
+     */
+    protected function _getTagString(): string
     {
         if (isset($this->_fields['tag_string'])) {
             return $this->_fields['tag_string'];

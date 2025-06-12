@@ -8,18 +8,23 @@ use Cake\ORM\Table;
 use Override;
 
 /**
- * ArticlesCategories Model
- *
- * @property &\Cake\ORM\Association\BelongsTo $BloggerArticles
- * @property &\Cake\ORM\Association\BelongsTo $BloggerCategories
- * @method \Blogger\Model\Entity\ArticlesCategory get($primaryKey, $options = [])
- * @method \Blogger\Model\Entity\ArticlesCategory newEntity($data = null, array $options = [])
- * @method \Blogger\Model\Entity\ArticlesCategory[] newEntities(array $data, array $options = [])
- * @method \Blogger\Model\Entity\ArticlesCategory|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \Blogger\Model\Entity\ArticlesCategory saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @property \Blogger\Model\Table\ArticlesTable&\Cake\ORM\Association\BelongsTo $Articles
+ * @property \Blogger\Model\Table\CategoriesTable&\Cake\ORM\Association\BelongsTo $Categories
+ * @method \Blogger\Model\Entity\ArticlesCategory newEmptyEntity()
+ * @method \Blogger\Model\Entity\ArticlesCategory newEntity(array $data, array $options = [])
+ * @method array<\Blogger\Model\Entity\ArticlesCategory> newEntities(array $data, array $options = [])
+ * @method \Blogger\Model\Entity\ArticlesCategory get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
+ * @method \Blogger\Model\Entity\ArticlesCategory findOrCreate(\Cake\ORM\Query\SelectQuery|callable|array $search, ?callable $callback = null, array $options = [])
  * @method \Blogger\Model\Entity\ArticlesCategory patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Blogger\Model\Entity\ArticlesCategory[] patchEntities($entities, array $data, array $options = [])
- * @method \Blogger\Model\Entity\ArticlesCategory findOrCreate($search, callable $callback = null, $options = [])
+ * @method array<\Blogger\Model\Entity\ArticlesCategory> patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \Blogger\Model\Entity\ArticlesCategory|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
+ * @method \Blogger\Model\Entity\ArticlesCategory saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\ArticlesCategory>|false saveMany(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\ArticlesCategory> saveManyOrFail(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\ArticlesCategory>|false deleteMany(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\ArticlesCategory> deleteManyOrFail(iterable $entities, array $options = [])
+ * @mixin \Cake\ORM\Behavior\CounterCacheBehavior
+ * @extends \Cake\ORM\Table<array{CounterCache: \Cake\ORM\Behavior\CounterCacheBehavior}>
  */
 class ArticlesCategoriesTable extends Table
 {

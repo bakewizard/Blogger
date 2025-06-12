@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var array<\Blogger\Model\Entity\Tag>|\Cake\Collection\CollectionInterface<\Blogger\Model\Entity\Tag> $tags
+ */
+?>
 <div class="card">
     <div class="card-header">
         <div class="card-title"><i class="fa-solid fa-list me-2"></i><?= __('Tags list') ?></div>

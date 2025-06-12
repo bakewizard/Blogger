@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var array $config
+ * @var \Blogger\Model\Entity\Comment $comment
+ */
+?>
 <div id="comment-<?= $comment->id ?>" class="d-flex mt-3">
     <div class="flex-shrink-0">
         <?=

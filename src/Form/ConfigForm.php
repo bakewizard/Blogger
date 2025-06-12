@@ -7,6 +7,7 @@ use Cake\Core\Configure;
 use Cake\Form\Form;
 use Cake\Form\Schema;
 use Cake\Validation\Validator;
+use Override;
 
 /**
  * Blog Config Form.
@@ -14,11 +15,9 @@ use Cake\Validation\Validator;
 class ConfigForm extends Form
 {
     /**
-     * Builds the schema for the modelless form
-     *
-     * @param \Cake\Form\Schema $schema From schema
-     * @return $this
+     * @inheritDoc
      */
+    #[Override]
     protected function _buildSchema(Schema $schema): Schema
     {
         return $schema->addField('articlesPerPage', ['type' => 'integer', 'default' => 12])
@@ -30,11 +29,9 @@ class ConfigForm extends Form
     }
 
     /**
-     * Form validation builder
-     *
-     * @param \Cake\Validation\Validator $validator to use against the form
-     * @return \Cake\Validation\Validator
+     * @inheritDoc
      */
+    #[Override]
     public function validationDefault(Validator $validator): Validator
     {
         return $validator->nonNegativeInteger('articlesPerPage')
@@ -47,10 +44,9 @@ class ConfigForm extends Form
     }
 
     /**
-     * Defines what to execute once the From is being processed
-     *
-     * @return bool
+     * @inheritDoc
      */
+    #[Override]
     protected function _execute(array $data): bool
     {
         Configure::write($data);

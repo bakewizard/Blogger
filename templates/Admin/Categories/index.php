@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var mixed $crumbs
+ */
+?>
 <?= $this->Html->script('Blogger.backend/categories/index', ['block' => true]); ?>
 <div class="card">
     <div class="card-header with-border">

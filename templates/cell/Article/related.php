@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var object $block
+ * @var array<\Blogger\Model\Entity\Article>|\Cake\Collection\CollectionInterface<\Blogger\Model\Entity\Article> $articles
+ */
+?>
 <?php if (!empty($articles)): ?>
     <h4><?= $block->title ?>:</h4>
     <ul class="list-unstyled">

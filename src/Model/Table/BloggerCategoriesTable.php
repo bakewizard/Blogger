@@ -16,16 +16,17 @@ use Cake\Validation\Validator;
  * @method \Blogger\Model\Entity\BloggerCategory newEntity(array $data, array $options = [])
  * @method array<\Blogger\Model\Entity\BloggerCategory> newEntities(array $data, array $options = [])
  * @method \Blogger\Model\Entity\BloggerCategory get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
- * @method \Blogger\Model\Entity\BloggerCategory findOrCreate($search, ?callable $callback = null, array $options = [])
+ * @method \Blogger\Model\Entity\BloggerCategory findOrCreate(\Cake\ORM\Query\SelectQuery|callable|array $search, ?callable $callback = null, array $options = [])
  * @method \Blogger\Model\Entity\BloggerCategory patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method array<\Blogger\Model\Entity\BloggerCategory> patchEntities(iterable $entities, array $data, array $options = [])
  * @method \Blogger\Model\Entity\BloggerCategory|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
  * @method \Blogger\Model\Entity\BloggerCategory saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
- * @method iterable<\Blogger\Model\Entity\BloggerCategory>|\Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\BloggerCategory>|false saveMany(iterable $entities, array $options = [])
- * @method iterable<\Blogger\Model\Entity\BloggerCategory>|\Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\BloggerCategory> saveManyOrFail(iterable $entities, array $options = [])
- * @method iterable<\Blogger\Model\Entity\BloggerCategory>|\Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\BloggerCategory>|false deleteMany(iterable $entities, array $options = [])
- * @method iterable<\Blogger\Model\Entity\BloggerCategory>|\Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\BloggerCategory> deleteManyOrFail(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\BloggerCategory>|false saveMany(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\BloggerCategory> saveManyOrFail(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\BloggerCategory>|false deleteMany(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\BloggerCategory> deleteManyOrFail(iterable $entities, array $options = [])
  * @mixin \Cake\ORM\Behavior\TreeBehavior
+ * @extends \Cake\ORM\Table<array{Tree: \Cake\ORM\Behavior\TreeBehavior}>
  */
 class BloggerCategoriesTable extends Table
 {

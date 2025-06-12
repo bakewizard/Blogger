@@ -11,22 +11,26 @@ use Override;
 /**
  * Categories Model
  *
- * @property \Blogger\Model\Table\CategoriesTable&\Cake\ORM\Association\BelongsTo $ParentBloggerCategories
- * @property \Blogger\Model\Table\CategoriesTable&\Cake\ORM\Association\HasMany $ChildBloggerCategories
  * @method \Blogger\Model\Entity\Category newEmptyEntity()
  * @method \Blogger\Model\Entity\Category newEntity(array $data, array $options = [])
  * @method array<\Blogger\Model\Entity\Category> newEntities(array $data, array $options = [])
  * @method \Blogger\Model\Entity\Category get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
- * @method \Blogger\Model\Entity\Category findOrCreate($search, ?callable $callback = null, array $options = [])
+ * @method \Blogger\Model\Entity\Category findOrCreate(\Cake\ORM\Query\SelectQuery|callable|array $search, ?callable $callback = null, array $options = [])
  * @method \Blogger\Model\Entity\Category patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method array<\Blogger\Model\Entity\Category> patchEntities(iterable $entities, array $data, array $options = [])
  * @method \Blogger\Model\Entity\Category|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
  * @method \Blogger\Model\Entity\Category saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
- * @method iterable<\Blogger\Model\Entity\Category>|\Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Category>|false saveMany(iterable $entities, array $options = [])
- * @method iterable<\Blogger\Model\Entity\BloggerCategory>|\Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Category> saveManyOrFail(iterable $entities, array $options = [])
- * @method iterable<\Blogger\Model\Entity\Category>|\Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Category>|false deleteMany(iterable $entities, array $options = [])
- * @method iterable<\Blogger\Model\Entity\Category>|\Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Category> deleteManyOrFail(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Category>|false saveMany(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Category> saveManyOrFail(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Category>|false deleteMany(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Blogger\Model\Entity\Category> deleteManyOrFail(iterable $entities, array $options = [])
  * @mixin \Cake\ORM\Behavior\TreeBehavior
+ * @property \Blogger\Model\Table\CategoriesTable&\Cake\ORM\Association\BelongsTo $ParentCategories
+ * @property \Blogger\Model\Table\CategoriesTable&\Cake\ORM\Association\HasMany $ChildCategories
+ * @property \Cake\ORM\Table&\Cake\ORM\Association\HasMany $BloggerCategoriesI18n
+ * @property \Blogger\Model\Table\ArticlesTable&\Cake\ORM\Association\BelongsToMany $Articles
+ * @mixin \Cake\ORM\Behavior\TranslateBehavior
+ * @extends \Cake\ORM\Table<array{Translate: \Cake\ORM\Behavior\TranslateBehavior, Tree: \Cake\ORM\Behavior\TreeBehavior}>
  */
 class CategoriesTable extends Table
 {

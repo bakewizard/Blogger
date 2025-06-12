@@ -8,6 +8,9 @@ namespace Blogger\Controller\Admin;
  *
  * @property \Blogger\Model\Table\CommentsTable $Comments
  * @method \Blogger\Model\Entity\Comment[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @property \Search\Controller\Component\SearchComponent $Search
+ * @property \Authentication\Controller\Component\AuthenticationComponent $Authentication
+ * @property \Authorization\Controller\Component\AuthorizationComponent $Authorization
  */
 class CommentsController extends AppController
 {
@@ -16,7 +19,7 @@ class CommentsController extends AppController
      *
      * Displays a comments list
      *
-     * @return \Cake\Http\Response|null
+     * @return \Cake\Http\Response|void
      */
     public function index()
     {
@@ -33,7 +36,7 @@ class CommentsController extends AppController
      * View method
      *
      * @param string|null $id Comment id.
-     * @return \Cake\Http\Response|null
+     * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view(?string $id = null)
@@ -47,7 +50,7 @@ class CommentsController extends AppController
      * Edit method
      *
      * @param string|null $id Comment id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit(?string $id = null)

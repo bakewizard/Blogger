@@ -21,8 +21,11 @@ use Cake\ORM\Entity;
  * @property string|null $seo_keywords
  * @property int $articles_count
  *
- * @property \Blogger\Model\Entity\ParentBloggerCategory $parent_blogger_category
- * @property \Blogger\Model\Entity\ChildBloggerCategory[] $child_blogger_categories
+ * @property \Blogger\Model\Entity\Category|null $parent_category
+ * @property array<\Blogger\Model\Entity\Category> $child_categories
+ * @property array<\Blogger\Model\Entity\Article> $articles
+ * @property \Cake\ORM\Entity $_joinData
+ * @property array<\Cake\ORM\Entity> $_i18n
  */
 class Category extends Entity
 {

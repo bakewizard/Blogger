@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var array $config
+ * @var array<\Blogger\Model\Entity\Category>|\Cake\Collection\CollectionInterface<\Blogger\Model\Entity\Category> $categories
+ */
+?>
 <div id="categories" class="row">
     <?php foreach ($categories as $category): ?>
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 mb-3" data-id="<?= $category->id ?>" data-url="<?= $this->Url->build(['action' => 'move']) ?>">

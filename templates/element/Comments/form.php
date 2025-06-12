@@ -1,3 +1,12 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var mixed $article_id
+ * @var array $config
+ * @var mixed $parent_id
+ * @var mixed $user_id
+ */
+?>
 <?= $this->Form->create(null, ['url' => ['plugin' => 'Blogger', 'controller' => 'Articles', 'action' => 'addComment']]) ?>
 <?= $this->Form->hidden('article_id', ['val' => $article_id]); ?>
 <?php if (isset($parent_id)): ?>

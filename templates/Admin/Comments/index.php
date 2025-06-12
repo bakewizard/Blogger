@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var array<\Blogger\Model\Entity\Comment>|\Cake\Collection\CollectionInterface<\Blogger\Model\Entity\Comment> $comments
+ */
+?>
 <div class="card">
     <div class="card-header">
         <div class="card-title"><i class="fa-solid fa-list me-2"></i><?= __('Comments list') ?></div>

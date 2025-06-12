@@ -7,7 +7,9 @@ namespace Blogger\Controller\Admin;
  * Categories Controller
  *
  * @property \Blogger\Model\Table\CategoriesTable $Categories
- * @method \Blogger\Model\Entity\Category[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @property \Search\Controller\Component\SearchComponent $Search
+ * @property \Authentication\Controller\Component\AuthenticationComponent $Authentication
+ * @property \Authorization\Controller\Component\AuthorizationComponent $Authorization
  */
 class CategoriesController extends AppController
 {
@@ -16,9 +18,10 @@ class CategoriesController extends AppController
      *
      * Displays a categories list
      *
-     * @return \Cake\Http\Response|null
+     * @param string $id Category id.
+     * @return \Cake\Http\Response|void
      */
-    public function index($id = null)
+    public function index(?string $id = null)
     {
         $categories = $this->Categories->find()->where(['parent_id is' => $id])->orderByAsc('lft')->toArray();
 
@@ -41,11 +44,15 @@ class CategoriesController extends AppController
      * View method
      *
      * @param string|null $id Category id.
-     * @return \Cake\Http\Response|null
+     * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view(?string $id = null)
     {
+        if ($id === null) {
+            return $this->redirect(['action' => 'index']);
+        }
+
         $category = $this->Categories->get($id, contain: ['Articles' => [
                 'sort' => [
                     'IF(Articles.sort_order = 0, 1, 0)' => 'asc',
@@ -86,7 +93,7 @@ class CategoriesController extends AppController
      * Edit method
      *
      * @param string|null $id Category id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @return \Cake\Http\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit(?string $id = null)
@@ -126,6 +133,13 @@ class CategoriesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    /**
+     * Move method
+     *
+     * Moves a category up or down in the list.
+     *
+     * @return \Cake\Http\Response|null Redirects to index.
+     */
     public function move()
     {
         $this->request->allowMethod(['post', 'put']);
@@ -152,7 +166,16 @@ class CategoriesController extends AppController
         return $this->redirect(['action' => 'index', $category->parent_id]);
     }
 
-    public function editArticle($id = null)
+    /**
+     * Edit article
+     *
+     * Edits an article in the category.
+     *
+     * @param string|null $id Article id.
+     * @return \Cake\Http\Response|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function editArticle(?string $id = null)
     {
         $article = $this->Categories->Articles->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {

@@ -21,8 +21,8 @@ use Cake\ORM\Entity;
  * @property string|null $seo_keywords
  * @property int $articles_count
  *
- * @property \Blogger\Model\Entity\ParentBloggerCategory $parent_blogger_category
- * @property \Blogger\Model\Entity\ChildBloggerCategory[] $child_blogger_categories
+ * @property \Blogger\Model\Entity\BloggerCategory|null $parent_blogger_category
+ * @property array<\Blogger\Model\Entity\BloggerCategory> $child_blogger_categories
  */
 class BloggerCategory extends Entity
 {

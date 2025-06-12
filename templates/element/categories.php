@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var mixed $children
+ */
+?>
 <ul class="list-unstyled ms-2 mb-0">
     <?php foreach ($children as $child): ?>
         <li class="p-1">

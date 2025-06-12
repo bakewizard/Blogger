@@ -14,6 +14,9 @@ use Override;
 
 class CommentListener implements EventListenerInterface
 {
+    /**
+     * @inheritDoc
+     */
     #[Override]
     public function implementedEvents(): array
     {
@@ -22,6 +25,16 @@ class CommentListener implements EventListenerInterface
         ];
     }
 
+    /**
+     * Triggered after a comment is saved.
+     *
+     * If the comment is new and notifications are enabled, it sends an email notification.
+     *
+     * @param \Cake\Event\EventInterface $event The event that was triggered.
+     * @param \Blogger\Model\Entity\Comment $entity The entity that was saved.
+     * @param \ArrayObject $options Additional options passed to the save method.
+     * @return void
+     */
     public function onAfterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
     {
         $config = Configure::read('Blogger');
@@ -31,13 +44,23 @@ class CommentListener implements EventListenerInterface
         }
     }
 
-    private function sendNotifyMail($entity): void
+    /**
+     * Sends a notification email when a new comment or reply is posted.
+     *
+     * If the comment is a reply, it notifies the original commenter.
+     * If it's a new comment on an article, it notifies the article author.
+     *
+     * @param \Blogger\Model\Entity\Comment $entity The comment entity.
+     * @return void
+     */
+    private function sendNotifyMail(EntityInterface $entity): void
     {
         $email = new Mailer();
 
         $email->setEmailFormat('html');
 
         if (isset($entity->parent_id)) {
+            /** @var \Blogger\Model\Table\CommentsTable $comments */
             $comments = FactoryLocator::get('Table')->get('Blogger.Comments');
             $comment = $comments->get($entity->parent_id, ['contain' => ['Articles', 'Users']]);
             $email
@@ -48,6 +71,7 @@ class CommentListener implements EventListenerInterface
             $email->viewBuilder()
                     ->setTemplate('Blogger.reply_notify');
         } else {
+            /** @var \Blogger\Model\Table\ArticlesTable $articles */
             $articles = FactoryLocator::get('Table')->get('Blogger.Articles');
             $article = $articles->get($entity->article_id, ['contain' => ['Users']]);
             $email

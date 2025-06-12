@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var \Blogger\Model\Entity\Tag $tag
+ */
+?>
 <div class="card card-success card-outline">
     <div class="card-header">
         <div class="card-title"><i class="fa-solid fa-edit me-2"></i><?= __('Add Tag') ?></div>

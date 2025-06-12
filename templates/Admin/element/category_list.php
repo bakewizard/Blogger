@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var array<\Blogger\Model\Entity\Category>|\Cake\Collection\CollectionInterface<\Blogger\Model\Entity\Category> $categories
+ */
+?>
 <ul id="categories" class="list-group">
     <?php foreach ($categories as $category): ?>
         <li class="list-group-item  d-flex justify-content-between align-items-start" data-id="<?= $category->id ?>" data-url="<?= $this->Url->build(['action' => 'move']) ?>">
