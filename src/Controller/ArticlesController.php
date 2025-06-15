@@ -37,6 +37,7 @@ class ArticlesController extends AppController
      *
      * Displays an articles list
      *
+     * @menu
      * @return \Cake\Http\Response|void
      */
     public function index()
@@ -51,6 +52,7 @@ class ArticlesController extends AppController
      *
      * Displays a list of articles based on search criteria
      *
+     * @menu
      * @return \Cake\Http\Response|void
      */
     public function search()
@@ -71,7 +73,7 @@ class ArticlesController extends AppController
      *
      * Displays a single article
      *
-     * @items Articles
+     * @menu Articles
      * @param string|null $id Article id.
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
