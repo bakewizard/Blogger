@@ -6,10 +6,10 @@ namespace Blogger\Event;
 use ArrayObject;
 use Cake\Core\Configure;
 use Cake\Datasource\EntityInterface;
-use Cake\Datasource\FactoryLocator;
 use Cake\Event\EventInterface;
 use Cake\Event\EventListenerInterface;
 use Cake\Mailer\Mailer;
+use Cake\ORM\TableRegistry;
 use Override;
 
 class CommentListener implements EventListenerInterface
@@ -60,8 +60,7 @@ class CommentListener implements EventListenerInterface
         $email->setEmailFormat('html');
 
         if (isset($entity->parent_id)) {
-            /** @var \Blogger\Model\Table\CommentsTable $comments */
-            $comments = FactoryLocator::get('Table')->get('Blogger.Comments');
+            $comments = TableRegistry::getTableLocator()->get('Blogger.Comments');
             $comment = $comments->get($entity->parent_id, ['contain' => ['Articles', 'Users']]);
             $email
                     ->setSubject(__d('blogger', 'New reply to your comment'))
@@ -71,8 +70,7 @@ class CommentListener implements EventListenerInterface
             $email->viewBuilder()
                     ->setTemplate('Blogger.reply_notify');
         } else {
-            /** @var \Blogger\Model\Table\ArticlesTable $articles */
-            $articles = FactoryLocator::get('Table')->get('Blogger.Articles');
+            $articles = TableRegistry::getTableLocator()->get('Blogger.Articles');
             $article = $articles->get($entity->article_id, ['contain' => ['Users']]);
             $email
                     ->setSubject(__d('blogger', 'New comment to your article'))

@@ -17,7 +17,7 @@ class ArticlesSeed extends AbstractSeed
                 'id' => 1,
                 'author_id' => 1,
                 'title' => 'Hello world!',
-                'body' => '<p>Welcome to Blogger plugin for CakeCMS. This is your first article. Edit or delete it, then start writing!</p>',
+                'body' => '<p>Welcome to Blogger plugin for BakeKit. This is your first article. Edit or delete it, then start writing!</p>',
                 'excerpt' => null,
                 'seo_title' => null,
                 'seo_description' => null,
