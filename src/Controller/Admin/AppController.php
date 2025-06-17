@@ -10,6 +10,7 @@ use Cake\Event\EventInterface;
  * @property \Search\Controller\Component\SearchComponent $Search
  * @property \Authentication\Controller\Component\AuthenticationComponent $Authentication
  * @property \Authorization\Controller\Component\AuthorizationComponent $Authorization
+ * @property \Blogger\Model\Table\ArticlesTable $Articles
  */
 class AppController extends BaseController
 {
@@ -28,8 +29,7 @@ class AppController extends BaseController
         $action = $request->getParam('action');
         if ($controller === 'Articles' && in_array($action, ['view', 'edit', 'delete'])) {
             $id = $request->getParam('pass')[0];
-            $articlesTable = $this->fetchTable('Articles');
-            $article = $articlesTable->get($id);
+            $article = $this->Articles->get($id);
             $this->Authorization->authorize($article);
         }
     }
