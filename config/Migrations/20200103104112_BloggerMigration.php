@@ -1,14 +1,19 @@
 <?php
 
-declare(strict_types=1);
+use Migrations\BaseMigration;
 
-use Migrations\AbstractMigration;
-
-class Initial extends AbstractMigration
+class BloggerMigration extends BaseMigration
 {
-
     public bool $autoId = false;
 
+    /**
+     * Up Method.
+     *
+     * More information on this method is available here:
+     * https://book.cakephp.org/phinx/0/en/migrations.html#the-up-method
+     *
+     * @return void
+     */
     public function up(): void
     {
         $this->table('blogger_articles')
@@ -131,7 +136,7 @@ class Initial extends AbstractMigration
                     'default' => true,
                     'limit' => null,
                     'null' => false,
-                    'signed' => false
+                    'signed' => false,
                 ])
                 ->addColumn('seo_title', 'string', [
                     'default' => null,
@@ -421,6 +426,14 @@ class Initial extends AbstractMigration
                 ->create();
     }
 
+    /**
+     * Down Method.
+     *
+     * More information on this method is available here:
+     * https://book.cakephp.org/phinx/0/en/migrations.html#the-down-method
+     *
+     * @return void
+     */
     public function down(): void
     {
         $this->table('blogger_articles_i18n')->drop()->save();

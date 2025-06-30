@@ -1,15 +1,20 @@
 <?php
 
-declare(strict_types=1);
-
-use Migrations\AbstractSeed;
+use Migrations\BaseSeed;
 
 /**
  * Articles seed.
  */
-class ArticlesSeed extends AbstractSeed
+class ArticlesSeed extends BaseSeed
 {
-
+    /**
+     * Run Method.
+     *
+     * More information on this method is available here:
+     * https://book.cakephp.org/phinx/0/en/seeding.html#the-run-method
+     *
+     * @return void
+     */
     public function run(): void
     {
         $data = [
@@ -25,12 +30,11 @@ class ArticlesSeed extends AbstractSeed
                 'published' => 1,
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
-                'comments_count' => 0
-            ]
+                'comments_count' => 0,
+            ],
         ];
 
         $table = $this->table('blogger_articles');
         $table->insert($data)->save();
     }
-
 }
