@@ -23,14 +23,14 @@ class TagsFixture extends TestFixture
             [
                 'id' => 1,
                 'title' => 'Test Tag 1',
-                'alias' => 'test_tag_1',
-                'articles_count' => 0,
+                'alias' => 'test-tag-1',
+                'articles_count' => 2,
             ],
             [
                 'id' => 2,
                 'title' => 'Test Tag 2',
-                'alias' => 'test_tag_2',
-                'articles_count' => 2,
+                'alias' => 'test-tag-2',
+                'articles_count' => 0,
             ],
         ];
         parent::init();

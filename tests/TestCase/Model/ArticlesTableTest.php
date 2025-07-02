@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Blogger\Test\TestCase\Model\Table;
 
 use Blogger\Model\Table\ArticlesTable;
+use Cake\ORM\Query\SelectQuery;
 use Cake\TestSuite\TestCase;
 
 /**
@@ -38,7 +39,7 @@ class ArticlesTableTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->Articles = $this->fetchTable('Articles');
+        $this->Articles = $this->fetchTable('Blogger.Articles');
     }
 
     /**
@@ -46,14 +47,14 @@ class ArticlesTableTest extends TestCase
      */
     protected function tearDown(): void
     {
-        unset($this->Resources);
+        unset($this->Articles);
         parent::tearDown();
     }
 
     public function testFindPublished(): void
     {
         $query = $this->Articles->find('published');
-        $this->assertInstanceOf(\Cake\ORM\Query\SelectQuery::class, $query);
+        $this->assertInstanceOf(SelectQuery::class, $query);
         foreach ($query->all() as $article) {
             $this->assertTrue($article->published);
         }
@@ -61,7 +62,7 @@ class ArticlesTableTest extends TestCase
 
     public function testFindComments(): void
     {
-        $query = $this->Articles->find('comments', ['sorting' => 'asc']);
+        $query = $this->Articles->find('comments', sorting : 'asc');
         $result = $query->contain('Comments')->first();
         $this->assertNotEmpty($result?->comments);
     }

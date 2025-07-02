@@ -173,11 +173,11 @@ class ArticlesController extends AppController
      * Displays a list of articles from a specific year, month, and day
      *
      * @param int $year Year.
-     * @param int|false $month Month.
-     * @param int|false $day Day.
+     * @param int|null $month Month.
+     * @param int|null $day Day.
      * @return \Cake\Http\Response|void
      */
-    public function archive(int $year, int|false $month = false, int|false $day = false)
+    public function archive(int $year, ?int $month = null, ?int $day = null)
     {
         $query = $this->Articles->find('published')
                 ->contain(['Users'])
