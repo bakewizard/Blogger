@@ -16,7 +16,7 @@
 <?php $this->append('right-sidebar', $this->region('blog-sidebar')); ?>
 
 <section id="blog-body" class="blog-body">
-    <?php if (!$articles->items()->isEmpty()): ?> 
+    <?php if (!$articles->items()->isEmpty()): ?>
         <?php foreach ($articles as $article): ?>
             <article>
                 <header>
@@ -25,7 +25,7 @@
                     </h1>
                     <p>
                         <span class="me-2"><i class="bi bi-clock"></i> <time><?= $article->created ?></time></span>
-                        <span class="me-2"><i class="bi bi-person"></i> 
+                        <span class="me-2"><i class="bi bi-person"></i>
                             <?= $this->Html->link($article->user->full_name, ['plugin' => 'Blogger', 'controller' => 'Articles', 'action' => 'user', 'id' => $article->user->id]); ?>
                         </span>
                         <span>

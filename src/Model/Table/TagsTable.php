@@ -46,11 +46,10 @@ class TagsTable extends Table
         $this->setDisplayField('title');
         $this->setPrimaryKey('id');
 
-        $this->belongsToMany('Articles', [
+        $this->belongsToMany('Blogger.Articles', [
             'foreignKey' => 'tag_id',
             'targetForeignKey' => 'article_id',
             'joinTable' => 'blogger_articles_tags',
-            'className' => 'Blogger.Articles',
         ]);
 
         $this->addBehavior('Translate', [

@@ -55,7 +55,7 @@ class CategoriesController extends AppController
 
         $category = $this->Categories->get($id, contain: ['Articles' => [
                 'sort' => [
-                    'IF(Articles.sort_order = 0, 1, 0)' => 'asc',
+                    '(CASE WHEN Articles.sort_order = 0 THEN 1 ELSE 0 END)' => 'asc',
                     'Articles.sort_order' => 'asc',
                 ],
         ]]);

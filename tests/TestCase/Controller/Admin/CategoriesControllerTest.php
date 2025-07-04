@@ -57,7 +57,6 @@ class CategoriesControllerTest extends TestCase
     {
         $this->get('/admin/blogger/categories');
         $this->assertResponseOk();
-        debug((string)$this->_response->getBody());
     }
 
     /**

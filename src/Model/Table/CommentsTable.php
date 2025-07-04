@@ -60,7 +60,7 @@ class CommentsTable extends Table
             'className' => 'Blogger.Comments',
             'foreignKey' => 'parent_id',
         ]);
-        $this->hasMany('ChildComments', [
+        $this->hasMany('Blogger.ChildComments', [
             'className' => 'Blogger.Comments',
             'foreignKey' => 'parent_id',
         ]);

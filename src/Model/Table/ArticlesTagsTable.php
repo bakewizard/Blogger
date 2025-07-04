@@ -46,15 +46,13 @@ class ArticlesTagsTable extends Table
         $this->setDisplayField('article_id');
         $this->setPrimaryKey(['article_id', 'tag_id']);
 
-        $this->belongsTo('Articles', [
+        $this->belongsTo('Blogger.Articles', [
             'foreignKey' => 'article_id',
             'joinType' => 'INNER',
-            'className' => 'Blogger.Articles',
         ]);
-        $this->belongsTo('Tags', [
+        $this->belongsTo('Blogger.Tags', [
             'foreignKey' => 'tag_id',
             'joinType' => 'INNER',
-            'className' => 'Blogger.Tags',
         ]);
 
         $this->addBehavior('CounterCache', [

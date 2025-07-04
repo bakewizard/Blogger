@@ -28,6 +28,18 @@ class ArticlesCategoriesFixture extends TestFixture
                 'article_id' => 2,
                 'category_id' => 2,
             ],
+            [
+                'article_id' => 3,
+                'category_id' => 3,
+            ],
+            [
+                'article_id' => 4,
+                'category_id' => 3,
+            ],
+            [
+                'article_id' => 5,
+                'category_id' => 3,
+            ],
         ];
         parent::init();
     }

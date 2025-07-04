@@ -43,15 +43,13 @@ class ArticlesCategoriesTable extends Table
         $this->setDisplayField('article_id');
         $this->setPrimaryKey(['article_id', 'category_id']);
 
-        $this->belongsTo('Articles', [
+        $this->belongsTo('Blogger.Articles', [
             'foreignKey' => 'article_id',
             'joinType' => 'INNER',
-            'className' => 'Blogger.Articles',
         ]);
-        $this->belongsTo('Categories', [
+        $this->belongsTo('Blogger.Categories', [
             'foreignKey' => 'category_id',
             'joinType' => 'INNER',
-            'className' => 'Blogger.Categories',
         ]);
 
         $this->addBehavior('CounterCache', [

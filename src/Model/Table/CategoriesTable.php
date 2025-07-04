@@ -58,11 +58,10 @@ class CategoriesTable extends Table
             'foreignKey' => 'parent_id',
         ]);
 
-        $this->belongsToMany('Articles', [
+        $this->belongsToMany('Blogger.Articles', [
             'foreignKey' => 'category_id',
             'targetForeignKey' => 'article_id',
             'joinTable' => 'blogger_articles_categories',
-            'className' => 'Blogger.Articles',
         ]);
 
         $this->addBehavior('Tree');

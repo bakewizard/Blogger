@@ -62,7 +62,7 @@ class ArticlesTableTest extends TestCase
 
     public function testFindComments(): void
     {
-        $query = $this->Articles->find('comments', sorting : 'asc');
+        $query = $this->Articles->find('comments', sorting: 'asc');
         $result = $query->contain('Comments')->first();
         $this->assertNotEmpty($result?->comments);
     }

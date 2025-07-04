@@ -67,7 +67,7 @@ class CommentsFixture extends TestFixture
                 'author_email' => null,
                 'author_ip' => '127.0.0.1',
                 'content' => 'I agree with this post.',
-                'approved' => 0,  // unapproved comment
+                'approved' => 0,
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
             ],
@@ -75,7 +75,7 @@ class CommentsFixture extends TestFixture
             [
                 'id' => 4,
                 'parent_id' => null,
-                'user_id' => 3,
+                'user_id' => 1,
                 'article_id' => 2,
                 'lft' => 1,
                 'rght' => 2,
