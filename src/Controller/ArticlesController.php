@@ -65,7 +65,7 @@ class ArticlesController extends AppController
 
         $this->set(compact('articles'));
 
-        $this->render('index');
+        return $this->render('index');
     }
 
     /**
@@ -118,7 +118,7 @@ class ArticlesController extends AppController
 
         $this->set(compact('articles'));
 
-        $this->render('index');
+        return $this->render('index');
     }
 
     /**
@@ -141,7 +141,7 @@ class ArticlesController extends AppController
 
         $this->set(compact('articles'));
 
-        $this->render('index');
+        return $this->render('index');
     }
 
     /**
@@ -164,7 +164,7 @@ class ArticlesController extends AppController
 
         $this->set(compact('articles'));
 
-        $this->render('index');
+        return $this->render('index');
     }
 
     /**
@@ -199,7 +199,7 @@ class ArticlesController extends AppController
 
         $this->set(compact('articles'));
 
-        $this->render('index');
+        return $this->render('index');
     }
 
     /**

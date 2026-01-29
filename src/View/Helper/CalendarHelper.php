@@ -31,6 +31,7 @@ class CalendarHelper extends Helper
     protected array $_defaultConfig = [];
     private int $currentYear;
     private int $currentMonth;
+    // @phpstan-ignore property.onlyWritten
     private int $currentDay;
     private int $daysInMonth;
     private int $firstDayOfTheWeek;

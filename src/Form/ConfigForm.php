@@ -47,7 +47,7 @@ class ConfigForm extends Form
      * @inheritDoc
      */
     #[Override]
-    protected function _execute(array $data): bool
+    protected function process(array $data): bool
     {
         Configure::write($data);
 
