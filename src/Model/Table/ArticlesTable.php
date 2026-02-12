@@ -8,7 +8,6 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 use Override;
-use Search\Manager;
 
 /**
  * Articles Model
@@ -82,40 +81,37 @@ class ArticlesTable extends Table
         ]);
 
         $this->addBehavior('Timestamp');
-        $this->addBehavior('Search.Search');
         $this->addBehavior('Translate', [
             'fields' => ['title', 'body', 'excerpt', 'seo_title', 'seo_description', 'seo_keywords'],
             'translationTable' => 'BloggerArticlesI18n',
         ]);
+        $this->addBehavior('Search.Search');
+
+        $this->setFilters();
     }
 
     /**
-     * Returns a search manager instance for the Articles model.
+     * Configures search filters for the Articles table.
      *
-     * This method configures the search manager to allow searching by title,
-     * created date range, published status, and full-text search on title and body.
-     *
-     * @return \Search\Manager
+     * @return void
      */
-    public function searchManager(): Manager
+    public function setFilters(): void
     {
         /** @var \Search\Model\Behavior\SearchBehavior $search */
         $search = $this->getBehavior('Search');
         $searchManager = $search->searchManager();
 
         $searchManager
-                ->useCollection('backend')
-                ->like('title', ['before' => true, 'after' => true])
-                ->compare('created_from', ['fields' => ['created'], 'operator' => '>='])
-                ->compare('created_to', ['fields' => ['created'], 'operator' => '<='])
-                ->value('published', ['filterEmpty' => true])
-                ->useCollection('frontend')
-                ->add('text', 'FullTextFilter', [
-                    'matchMode' => 'IN BOOLEAN MODE',
-                    'fields' => ['title', 'body'],
-        ]);
-
-        return $searchManager;
+            ->useCollection('backend')
+            ->like('title', ['before' => true, 'after' => true])
+            ->compare('created_from', ['fields' => ['created'], 'operator' => '>='])
+            ->compare('created_to', ['fields' => ['created'], 'operator' => '<='])
+            ->value('published', ['filterEmpty' => true])
+            ->useCollection('frontend')
+            ->add('text', 'FullTextFilter', [
+                'matchMode' => 'IN BOOLEAN MODE',
+                'fields' => ['title', 'body'],
+            ]);
     }
 
     /**
@@ -128,56 +124,56 @@ class ArticlesTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-                ->nonNegativeInteger('id')
-                ->allowEmptyString('id', null, 'create');
+            ->nonNegativeInteger('id')
+            ->allowEmptyString('id', null, 'create');
 
         $validator
-                ->scalar('title')
-                ->maxLength('title', 250)
-                ->requirePresence('title', 'create')
-                ->notEmptyString('title');
+            ->scalar('title')
+            ->maxLength('title', 250)
+            ->requirePresence('title', 'create')
+            ->notEmptyString('title');
 
         $validator
-                ->add('categories', 'custom', [
-                    'rule' => function ($value, $context) {
-                        return !empty($value['_ids']) && is_array($value['_ids']);
-                    },
-                    'message' => __d('blogger', 'Choose at least one category!'),
-        ]);
+            ->add('categories', 'custom', [
+                'rule' => function ($value, $context) {
+                    return !empty($value['_ids']) && is_array($value['_ids']);
+                },
+                'message' => __d('blogger', 'Choose at least one category!'),
+            ]);
 
         $validator
-                ->scalar('body')
-                ->maxLength('body', 16777215)
-                ->requirePresence('body', 'create')
-                ->notEmptyString('body');
+            ->scalar('body')
+            ->maxLength('body', 16777215)
+            ->requirePresence('body', 'create')
+            ->notEmptyString('body');
 
         $validator
-                ->scalar('excerpt')
-                ->maxLength('excerpt', 16777215)
-                ->allowEmptyString('excerpt');
+            ->scalar('excerpt')
+            ->maxLength('excerpt', 16777215)
+            ->allowEmptyString('excerpt');
 
         $validator
-                ->scalar('seo_title')
-                ->maxLength('seo_title', 160)
-                ->allowEmptyString('seo_title');
+            ->scalar('seo_title')
+            ->maxLength('seo_title', 160)
+            ->allowEmptyString('seo_title');
 
         $validator
-                ->scalar('seo_description')
-                ->maxLength('seo_description', 280)
-                ->allowEmptyString('seo_description');
+            ->scalar('seo_description')
+            ->maxLength('seo_description', 280)
+            ->allowEmptyString('seo_description');
 
         $validator
-                ->scalar('seo_keywords')
-                ->maxLength('seo_keywords', 100)
-                ->allowEmptyString('seo_keywords');
+            ->scalar('seo_keywords')
+            ->maxLength('seo_keywords', 100)
+            ->allowEmptyString('seo_keywords');
 
         $validator
-                ->nonNegativeInteger('sort_order')
-                ->allowEmptyString('sort_order');
+            ->nonNegativeInteger('sort_order')
+            ->allowEmptyString('sort_order');
 
         $validator
-                ->boolean('published')
-                ->notEmptyString('published');
+            ->boolean('published')
+            ->notEmptyString('published');
 
         return $validator;
     }
@@ -218,20 +214,20 @@ class ArticlesTable extends Table
     public function findRelated(SelectQuery $query, ?int $id): SelectQuery
     {
         $subQuery = $this->Tags
-                ->find()
-                ->select(['id'])
-                ->innerJoinWith('Articles', function (SelectQuery $q) use ($id) {
-                    return $q->where(['article_id =' => $id]);
-                });
+            ->find()
+            ->select(['id'])
+            ->innerJoinWith('Articles', function (SelectQuery $q) use ($id) {
+                return $q->where(['article_id =' => $id]);
+            });
 
         return $query
-                        ->select(['id', 'title', 'tags_count' => $query->func()->count('tag_id')])
-                        ->innerJoinWith('Tags', function (SelectQuery $q) use ($subQuery) {
-                            return $q->where(['tag_id IN' => $subQuery]);
-                        })
-                        ->where(['article_id !=' => $id])
-                        ->groupBy('article_id')
-                        ->orderByDesc('tags_count');
+            ->select(['id', 'title', 'tags_count' => $query->func()->count('tag_id')])
+            ->innerJoinWith('Tags', function (SelectQuery $q) use ($subQuery) {
+                return $q->where(['tag_id IN' => $subQuery]);
+            })
+            ->where(['article_id !=' => $id])
+            ->groupBy('article_id')
+            ->orderByDesc('tags_count');
     }
 
     /**
@@ -244,11 +240,11 @@ class ArticlesTable extends Table
     public function findComments(SelectQuery $query, string $sorting = 'desc'): SelectQuery
     {
         return $query->contain([
-                    'Comments' => function (SelectQuery $q) use ($sorting) {
-                        return $q->find('threaded')
-                                ->orderBy(['Comments.created' => $sorting])
-                                ->contain('Users');
-                    },
+            'Comments' => function (SelectQuery $q) use ($sorting) {
+                return $q->find('threaded')
+                    ->orderBy(['Comments.created' => $sorting])
+                    ->contain('Users');
+            },
         ]);
     }
 }
