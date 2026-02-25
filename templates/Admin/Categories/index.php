@@ -4,7 +4,7 @@
  * @var mixed $crumbs
  */
 ?>
-<?= $this->Html->script('Blogger.backend/categories/index', ['block' => true]); ?>
+<?= $this->Html->script('Blogger.backend/categories/index', ['block' => true, 'type' => 'module']); ?>
 <div class="card">
     <div class="card-header with-border">
         <h3 class="card-title">

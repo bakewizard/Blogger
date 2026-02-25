@@ -6,13 +6,13 @@
  * @var \Blogger\Model\Entity\Article $article
  */
 ?>
-<?= $this->Html->script(['/backend/plugins/tinymce/tinymce.min', 'Blogger.backend/articles/article'], ['block' => true]) ?>
+<?= $this->Html->script(['/backend/plugins/tinymce/tinymce.min', 'Blogger.backend/articles/article'], ['block' => true, 'type' => 'module']) ?>
 <div class="card card-success card-outline">
     <div class="card-header">
         <div class="card-title"><i class="fa-solid fa-edit me-2"></i><?= __('Add an article') ?></div>
     </div>
     <?= $this->Form->create($article, ['align' => 'horizontal']) ?>
-    <div class="card-body">  
+    <div class="card-body">
         <?= $this->Form->control('title'); ?>
         <?= $this->Form->control('tags._ids', ['options' => $tags, 'data-widget' => 'select']); ?>
         <?= $this->Form->control('categories._ids', ['options' => $categories, 'data-widget' => 'select']); ?>

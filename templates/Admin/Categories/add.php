@@ -5,7 +5,7 @@
  * @var \Blogger\Model\Entity\Category $category
  */
 ?>
-<?= $this->Html->script(['/backend/plugins/tinymce/tinymce.min', 'Blogger.backend/categories/category'], ['block' => true]); ?>
+<?= $this->Html->script(['/backend/plugins/tinymce/tinymce.min', 'Blogger.backend/categories/category'], ['block' => true, 'type' => 'module']); ?>
 <div class="card card-success card-outline">
     <div class="card-header">
         <div class="card-title"><i class="fa-solid fa-edit me-2"></i><?= __('Add Category') ?></div>

@@ -151,10 +151,13 @@ class CategoriesController extends AppController
 
         $category = $this->Categories->get($id);
 
+        /** @var \Cake\ORM\Behavior\TreeBehavior $tree */
+        $tree = $this->Categories->getBehavior('Tree');
+
         if ($newIndex < $oldIndex) {
-            $result = $this->Categories->moveUp($category, $oldIndex - $newIndex);
+            $result = $tree->moveUp($category, $oldIndex - $newIndex);
         } elseif ($newIndex > $oldIndex) {
-            $result = $this->Categories->moveDown($category, $newIndex - $oldIndex);
+            $result = $tree->moveDown($category, $newIndex - $oldIndex);
         }
 
         if (isset($result)) {
