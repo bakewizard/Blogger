@@ -25,8 +25,8 @@
                 'class' => 'btn btn-secondary',
                 'id' => 'seo-title-refresh',
                 'title' => __('Copy from article title'),
-                'escapeTitle' => false
-            ])
+                'escapeTitle' => false,
+            ]),
         ]);
         ?>
         <?=
@@ -36,8 +36,8 @@
                 'class' => 'btn btn-secondary',
                 'id' => 'seo-description-refresh',
                 'title' => __('Copy from article excerpt'),
-                'escapeTitle' => false
-            ])
+                'escapeTitle' => false,
+            ]),
         ]);
         ?>
         <?= $this->Form->control('seo_keywords'); ?>

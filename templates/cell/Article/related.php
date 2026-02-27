@@ -5,10 +5,10 @@
  * @var array<\Blogger\Model\Entity\Article>|\Cake\Collection\CollectionInterface<\Blogger\Model\Entity\Article> $articles
  */
 ?>
-<?php if (!empty($articles)): ?>
+<?php if (!empty($articles)) : ?>
     <h4><?= $block->title ?>:</h4>
     <ul class="list-unstyled">
-        <?php foreach ($articles as $article): ?>
+        <?php foreach ($articles as $article) : ?>
             <li>
                 <?=
                 $this->Html->link($article->title, [

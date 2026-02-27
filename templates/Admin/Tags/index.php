@@ -28,7 +28,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($tags as $tag): ?>
+                    <?php foreach ($tags as $tag) : ?>
                         <tr>
                             <td class="text-center align-middle"><?= $this->Form->checkbox('ids[]', ['hiddenField' => false, 'value' => $tag->id]) ?></td>
                             <td><?= h($tag->title) ?></td>
@@ -36,15 +36,17 @@
                             <td class="text-center actions">                                   
                                 <?= $this->Html->link('<i class="fa-solid fa-edit"></i>', ['action' => 'edit', $tag->id, '?' => $this->request->getQueryParams()], ['escape' => false, 'class' => 'btn btn-outline-success']) ?>
                                 <?=
-                                $this->Form->deleteLink('<i class="fa-solid fa-trash"></i>', ['action' => 'delete', $tag->id, '?' => $this->request->getQueryParams()],
-                                        [
+                                $this->Form->deleteLink(
+                                    '<i class="fa-solid fa-trash"></i>',
+                                    ['action' => 'delete', $tag->id, '?' => $this->request->getQueryParams()],
+                                    [
                                             'block' => true,
                                             'escape' => false,
                                             'confirm' => __('Are you sure you want to delete {0}?', $tag->title),
                                             'class' => 'btn btn-outline-danger',
                                             'data-bs-toggle' => 'modal',
-                                            'data-bs-target' => '#confirm-modal'
-                                        ]
+                                            'data-bs-target' => '#confirm-modal',
+                                        ],
                                 )
                                 ?>
                             </td>

@@ -23,8 +23,8 @@
                 'class' => 'btn btn-secondary',
                 'id' => 'seo-title-refresh',
                 'title' => __('Copy from category name'),
-                'escapeTitle' => false
-            ])
+                'escapeTitle' => false,
+            ]),
         ]);
         ?>
         <?=
@@ -34,8 +34,8 @@
                 'class' => 'btn btn-secondary',
                 'id' => 'seo-description-refresh',
                 'title' => __('Copy from category description'),
-                'escapeTitle' => false
-            ])
+                'escapeTitle' => false,
+            ]),
         ]);
         ?>
         <?= $this->Form->control('seo_keywords'); ?>

@@ -16,7 +16,7 @@
                     'rel' => 'nofollow',
                     'title' => __('List'),
                     'escape' => false,
-                    'class' => 'btn btn-sm ' . ($view === 'list' ? 'btn-primary' : 'btn-outline-primary')
+                    'class' => 'btn btn-sm ' . ($view === 'list' ? 'btn-primary' : 'btn-outline-primary'),
                 ])
                 ?>
                 <?=
@@ -25,7 +25,7 @@
                     'rel' => 'nofollow',
                     'title' => __('Grid'),
                     'escape' => false,
-                    'class' => 'btn btn-sm ' . ($view === 'grid' ? 'btn-primary' : 'btn-outline-primary')
+                    'class' => 'btn btn-sm ' . ($view === 'grid' ? 'btn-primary' : 'btn-outline-primary'),
                 ])
                 ?>
             </div>
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <?php if (!empty($crumbs)): ?>
+    <?php if (!empty($crumbs)) : ?>
         <div class="card-header with-border">
             <?= $this->element('category_crumbs') ?>
         </div>

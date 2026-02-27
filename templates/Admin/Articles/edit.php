@@ -12,7 +12,7 @@
 <div class="card card-success card-outline">
     <div class="card-header">
         <div class="card-title"><i class="fa-solid fa-edit me-2"></i><?= __('Edit an article') ?></div>
-        <?php if (count($config['App']['I18n']['languages']) > 1): ?>
+        <?php if (count($config['App']['I18n']['languages']) > 1) : ?>
             <div class="card-tools">
                 <?= $this->element('form/locales', ['locale' => $article->_locale]) ?>
             </div>
@@ -33,8 +33,8 @@
                 'class' => 'btn btn-secondary',
                 'id' => 'seo-title-refresh',
                 'title' => __('Copy from article title'),
-                'escapeTitle' => false
-            ])
+                'escapeTitle' => false,
+            ]),
         ]);
         ?>
         <?=
@@ -44,8 +44,8 @@
                 'class' => 'btn btn-secondary',
                 'id' => 'seo-description-refresh',
                 'title' => __('Copy from article excerpt'),
-                'escapeTitle' => false
-            ])
+                'escapeTitle' => false,
+            ]),
         ]);
         ?>
         <?= $this->Form->control('seo_keywords'); ?>

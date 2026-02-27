@@ -16,7 +16,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($articles as $article): ?>
+                    <?php foreach ($articles as $article) : ?>
                         <tr>
                             <td>
                                 <?= $article->hasValue('user') ? $article->user->full_name : '' ?>

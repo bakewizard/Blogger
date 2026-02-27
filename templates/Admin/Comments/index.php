@@ -29,7 +29,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($comments as $comment): ?>
+                    <?php foreach ($comments as $comment) : ?>
                         <tr>
                             <td class="text-center align-middle"><?= $this->Form->checkbox('ids[]', ['hiddenField' => false, 'value' => $comment->id]) ?></td>
                             <td>
@@ -41,17 +41,17 @@
                                             'alt' => $comment->user->full_name ?? null,
                                             'class' => 'img-thumbnail',
                                             'width' => 60,
-                                            'height' => 60
+                                            'height' => 60,
                                         ]);
                                         ?>
                                     </div>
                                     <div class="flex-grow-1 ms-3">
-                                        <?php if ($comment->hasValue('user')): ?>
+                                        <?php if ($comment->hasValue('user')) : ?>
                                             <h6 class="mt-0">
                                                 <?= $comment->user->full_name ?>
                                             </h6>
                                             <?= $comment->user->email ?>
-                                        <?php else: ?>
+                                        <?php else : ?>
                                             <h6 class="mt-0"><?= $comment->author_name ?></h6>
                                             <?= $comment->author_email ?>
                                         <?php endif; ?>
@@ -71,9 +71,9 @@
                                     <?= $this->Html->link('<i class="fa-solid fa-newspaper"></i> ' . $comment->article->title, ['controller' => 'Articles', 'action' => 'view', $comment->article->id], ['escape' => false]) ?>
                                 </div>
                                 <div>
-                                    <?php if ($comment->hasValue('parent_comment')): ?>
+                                    <?php if ($comment->hasValue('parent_comment')) : ?>
                                         <?= $this->Html->link('<i class="fa-regular fa-comment-dots"></i> ' . 'Parent comment', ['controller' => 'Comments', 'action' => 'edit', $comment->parent_comment->id], ['escape' => false]) ?>
-                                    <?php else: ?>
+                                    <?php else : ?>
                                         <?= '---' ?>
                                     <?php endif; ?>
                                 </div>
@@ -85,15 +85,17 @@
                                 <?= $this->Html->link('<i class="fa-solid fa-eye"></i>', ['action' => 'view', $comment->id], ['escape' => false, 'class' => 'btn btn-outline-primary']) ?>
                                 <?= $this->Html->link('<i class="fa-solid fa-edit"></i>', ['action' => 'edit', $comment->id, '?' => $this->request->getQueryParams()], ['escape' => false, 'class' => 'btn btn-outline-success']) ?>
                                 <?=
-                                $this->Form->deleteLink('<i class="fa-solid fa-trash"></i>', ['action' => 'delete', $comment->id, '?' => $this->request->getQueryParams()],
-                                        [
+                                $this->Form->deleteLink(
+                                    '<i class="fa-solid fa-trash"></i>',
+                                    ['action' => 'delete', $comment->id, '?' => $this->request->getQueryParams()],
+                                    [
                                             'block' => true,
                                             'escape' => false,
                                             'confirm' => __('Are you sure you want to delete # {0}?', $comment->id),
                                             'class' => 'btn btn-outline-danger',
                                             'data-bs-toggle' => 'modal',
-                                            'data-bs-target' => '#confirm-modal'
-                                        ]
+                                            'data-bs-target' => '#confirm-modal',
+                                        ],
                                 )
                                 ?>
                             </td>

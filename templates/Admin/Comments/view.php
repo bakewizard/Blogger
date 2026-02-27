@@ -48,7 +48,7 @@
     <div class="card-header">
         <div class="card-title"><?= __('Related Comments') ?></div>
     </div>
-    <?php if (!empty($comment->child_comments)): ?>
+    <?php if (!empty($comment->child_comments)) : ?>
         <div class="card-body table-responsive p-0">
             <table class="table table-hover">
                 <tr>
@@ -59,12 +59,12 @@
                     <th scope="col"><?= __('Modified') ?></th>
                     <th scope="col"><?= __('Approved') ?></th>
                 </tr>
-                <?php foreach ($comment->child_comments as $child_comment): ?>
+                <?php foreach ($comment->child_comments as $child_comment) : ?>
                     <tr>
                         <td>
-                            <?php if ($child_comment->hasValue('user')): ?>
+                            <?php if ($child_comment->hasValue('user')) : ?>
                                 <?= $child_comment->user->full_name ?>
-                            <?php else: ?>
+                            <?php else : ?>
                                 <?= $child_comment->author_name ?>
                             <?php endif; ?>
                         </td>

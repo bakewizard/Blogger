@@ -57,7 +57,6 @@ class CalendarHelper extends Helper
         $this->date = $this->date->setDate($this->currentYear, $this->currentMonth, 1);
     }
 
-
     /**
      * Renders the calendar for the current month.
      *

@@ -15,7 +15,7 @@
         'action' => 'view',
         'id' => $article->id,
         '#' => 'comment-' . $comment->id,
-        '_full' => true
+        '_full' => true,
     ])
     ?>
 </p>

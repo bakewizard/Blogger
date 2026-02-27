@@ -10,7 +10,7 @@
         <?= $block->title ?>
     </h5>
     <ul class="list-unstyled ms-3 mb-0">
-        <?php foreach ($articles as $article): ?>
+        <?php foreach ($articles as $article) : ?>
             <li>
                 <?=
                 $this->Html->link($article->title, [

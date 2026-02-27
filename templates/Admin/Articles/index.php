@@ -35,7 +35,7 @@
         <div class="row">
             <div class="col-sm-12">         
                 <button type="submit" id="button-filter" class="btn btn-outline-success"><i class="fa-solid fa-search"></i> <?= __('Filter') ?></button>
-                <?php if (!empty($_isSearch)): ?>
+                <?php if (!empty($_isSearch)) : ?>
                     <?= $this->Html->link('<i class="fa-solid fa-times-circle"></i> ' . __('Clear'), ['controller' => 'Articles', 'action' => 'index'], ['class' => 'btn btn-outline-danger', 'escape' => false]) ?>
                 <?php endif; ?>
             </div>
@@ -61,13 +61,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($articles as $article): ?>
+                    <?php foreach ($articles as $article) : ?>
                         <tr>
                             <td class="text-center align-middle"><?= $this->Form->checkbox('ids[]', ['hiddenField' => false, 'value' => $article->id]) ?></td>
                             <td><?= h($article->user->full_name) ?></td>
                             <td><?= h($article->title) ?></td>
                             <td>
-                                <?php foreach ($article->categories as $category): ?>
+                                <?php foreach ($article->categories as $category) : ?>
                                     <p><?= $category->name ?></p>
                                 <?php endforeach; ?>
                             </td>
@@ -79,15 +79,17 @@
                                 <?= $this->Html->link('<i class="fa-solid fa-eye"></i>', ['action' => 'view', $article->id], ['escape' => false, 'class' => 'btn btn-outline-primary']) ?>
                                 <?= $this->Html->link('<i class="fa-solid fa-edit"></i>', ['action' => 'edit', $article->id, '?' => $this->request->getQueryParams()], ['escape' => false, 'class' => 'btn btn-outline-success']) ?>
                                 <?=
-                                $this->Form->deleteLink('<i class="fa-solid fa-trash"></i>', ['action' => 'delete', $article->id, '?' => $this->request->getQueryParams()],
-                                        [
+                                $this->Form->deleteLink(
+                                    '<i class="fa-solid fa-trash"></i>',
+                                    ['action' => 'delete', $article->id, '?' => $this->request->getQueryParams()],
+                                    [
                                             'block' => true,
                                             'escape' => false,
                                             'confirm' => __('Are you sure you want to delete {0}?', $article->title),
                                             'class' => 'btn btn-outline-danger',
                                             'data-bs-toggle' => 'modal',
-                                            'data-bs-target' => '#confirm-modal'
-                                        ]
+                                            'data-bs-target' => '#confirm-modal',
+                                        ],
                                 )
                                 ?>
                             </td>

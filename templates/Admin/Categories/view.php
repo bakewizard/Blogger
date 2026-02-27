@@ -12,13 +12,13 @@
         </h3>
     </div>
 
-    <?php if (!empty($crumbs)): ?>
+    <?php if (!empty($crumbs)) : ?>
         <div class="card-header with-border">
             <?= $this->element('category_crumbs') ?>
         </div>
     <?php endif; ?>
 
-    <?php if (!empty($category->articles)): ?>
+    <?php if (!empty($category->articles)) : ?>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered">
@@ -34,7 +34,7 @@
                         <th class="text-center"><?= __('Published') ?></th>
                         <th></th>
                     </tr>
-                    <?php foreach ($category->articles as $i => $article): ?>
+                    <?php foreach ($category->articles as $i => $article) : ?>
                         <?= $this->Form->create($article, ['id' => "article-form-{$i}", 'url' => ['action' => 'editArticle', $article->id]]); ?>
                         <tr>
                             <td><?= h($article->title) ?></td>
