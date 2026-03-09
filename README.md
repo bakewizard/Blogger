@@ -6,7 +6,7 @@
 [![PHP Version](https://img.shields.io/badge/PHP-8.3%2B-blue)](https://php.net)
 [![GitHub release](https://img.shields.io/github/v/release/bakewizard/Blogger?label=stable&sort=semver)](https://github.com/bakewizard/bakekit/releases)
 
-The `Blogger` plugin adds blogging functionality to [BakeKit CMS](https://github.com/bakewizard/BakeKit), including posts, categories, and tags.
+The `Blogger` plugin adds blogging functionality to [BakeKit](https://github.com/bakewizard/BakeKit), including posts, categories, and tags.
 
 ## Features
 
