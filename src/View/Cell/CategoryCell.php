@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Blogger\View\Cell;
 
+use App\Attribute\Link;
 use App\View\Cell\BlockCell as Cell;
 
 /**
@@ -17,6 +18,7 @@ class CategoryCell extends Cell
      *
      * @return void
      */
+    #[Link(summary: 'Articles categories', description: 'Displays a list of article categories')]
     public function display(): void
     {
         $showHierarchy = $this->block->params['showHierarchy'] ?? false;

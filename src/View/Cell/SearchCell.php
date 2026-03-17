@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Blogger\View\Cell;
 
+use App\Attribute\Link;
 use App\View\Cell\BlockCell as Cell;
 
 /**
@@ -17,6 +18,7 @@ class SearchCell extends Cell
      *
      * @return void
      */
+    #[Link(summary: 'Search', description: 'Displays a search form')]
     public function display(): void
     {
         $url = ['plugin' => 'Blogger', 'controller' => 'Articles', 'action' => 'search'];

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Blogger\View\Cell;
 
+use App\Attribute\Link;
 use App\View\Cell\BlockCell as Cell;
 
 /**
@@ -17,15 +18,14 @@ class ArticleCell extends Cell
      *
      * @return void
      */
+    #[Link(summary: 'Recent Articles', description: 'Displays a list of recent articles')]
     public function recent(): void
     {
-        $limit = intval($this->block->params['numberOfArticlesToShow'] ?? 5);
-
         $articles = $this->fetchTable('Blogger.Articles')
-                ->find('published')
-                ->limit($limit)
-                ->orderByDesc('Articles.created')
-                ->toArray();
+            ->find('published')
+            ->limit($this->getLimit())
+            ->orderByDesc('Articles.created')
+            ->toArray();
 
         $this->set(compact('articles'));
     }
@@ -37,15 +37,14 @@ class ArticleCell extends Cell
      *
      * @return void
      */
+    #[Link(summary: 'Popular (most commented) articles', description: 'Displays a list of popular articles')]
     public function popular(): void
     {
-        $limit = intval($this->block->params['numberOfArticlesToShow'] ?? 5);
-
         $articles = $this->fetchTable('Blogger.Articles')
-                ->find('published')
-                ->limit($limit)
-                ->orderByDesc('Articles.comments_count')
-                ->toArray();
+            ->find('published')
+            ->limit($this->getLimit())
+            ->orderByDesc('Articles.comments_count')
+            ->toArray();
 
         $this->set(compact('articles'));
     }
@@ -57,18 +56,34 @@ class ArticleCell extends Cell
      *
      * @return void
      */
+    #[Link(summary: 'Related Articles', description: 'Displays a list of related (have common tags) articles')]
     public function related(): void
     {
-        $idParam = $this->request->getParam('id');
-        $id = $idParam !== null ? intval($idParam) : null;
+        $id = $this->request->getParam('id') !== null
+            ? (int)$this->request->getParam('id')
+            : null;
 
-        $limit = intval($this->block->params['numberOfArticlesToShow'] ?? 5);
+        if ($id === null) {
+            $this->set('articles', []);
+
+            return;
+        }
 
         $articles = $this->fetchTable('Blogger.Articles')
-                ->find('related', id: $id)
-                ->limit($limit)
-                ->toArray();
+            ->find('related', id: $id)
+            ->limit($this->getLimit())
+            ->toArray();
 
         $this->set(compact('articles'));
+    }
+
+    /**
+     * Returns the configured article limit from block params.
+     *
+     * @return int
+     */
+    private function getLimit(): int
+    {
+        return (int)($this->block->params['numberOfArticlesToShow'] ?? 5);
     }
 }
