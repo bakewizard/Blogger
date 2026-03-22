@@ -154,7 +154,7 @@ class ArticlesControllerTest extends TestCase
     }
 
     /**
-     * Test addComment() method (failed save due to invalid input)
+     * Test addComment() method (failed save — article_id is missing)
      * Should redirect and show an error flash message
      */
     public function testAddCommentFail(): void
@@ -162,7 +162,12 @@ class ArticlesControllerTest extends TestCase
         $this->enableCsrfToken();
         $this->enableSecurityToken();
 
-        $this->post('/blogger/add-comment', []);
+        $this->post('/blogger/add-comment', [
+            'article_id' => 999, // non-existent article
+            'author_name' => 'John Doe',
+            'author_email' => 'johndoe@nodomain.net',
+            'content' => 'Great article!',
+        ]);
 
         $this->assertRedirect();
         $this->assertFlashMessage('There was an error while saving your comment. Try again');

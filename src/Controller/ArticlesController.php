@@ -5,6 +5,7 @@ namespace Blogger\Controller;
 
 use App\Attribute\Link;
 use Cake\Core\Configure;
+use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\Utility\Hash;
 use Override;
 use const CAL_GREGORIAN;
@@ -225,7 +226,20 @@ class ArticlesController extends AppController
         $config = Configure::read('Blogger');
 
         $articleId = (int)$this->request->getData('article_id');
-        $this->Articles->findById($articleId)->find('published')->firstOrFail();
+
+        if (!$articleId) {
+            $this->Flash->error(__d('blogger', 'There was an error while saving your comment. Try again'));
+
+            return $this->redirect($this->referer());
+        }
+
+        try {
+            $this->Articles->findById($articleId)->find('published')->firstOrFail();
+        } catch (RecordNotFoundException) {
+            $this->Flash->error(__d('blogger', 'There was an error while saving your comment. Try again'));
+
+            return $this->redirect($this->referer());
+        }
 
         $comment = $this->Articles->Comments->newEntity($this->request->getData());
         $comment->author_ip = $this->request->clientIp();
