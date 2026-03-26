@@ -20,7 +20,6 @@ class DashboardController extends AppController
      *
      * @return void
      */
-    #[Resource(label: 'Blogger dashboard')]
     public function index()
     {
     }
