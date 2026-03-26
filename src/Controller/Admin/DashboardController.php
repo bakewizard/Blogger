@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Blogger\Controller\Admin;
 
+use App\Attribute\Resource;
 use Override;
 
 /**
@@ -19,6 +20,7 @@ class DashboardController extends AppController
      *
      * @return void
      */
+    #[Resource(label: 'Blogger dashboard')]
     public function index()
     {
     }
@@ -31,6 +33,7 @@ class DashboardController extends AppController
      * @return \Cake\Http\Response|void
      */
     #[Override]
+    #[Resource(label: 'Blogger settings')]
     public function settings()
     {
         parent::settings();

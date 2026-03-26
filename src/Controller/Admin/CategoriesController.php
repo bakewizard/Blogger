@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Blogger\Controller\Admin;
 
+use App\Attribute\Resource;
+
 /**
  * Categories Controller
  *
@@ -21,6 +23,7 @@ class CategoriesController extends AppController
      * @param string $id Category id.
      * @return \Cake\Http\Response|void
      */
+    #[Resource(label: 'List categories')]
     public function index(?string $id = null)
     {
         $categories = $this->Categories->find()->where(['parent_id is' => $id])->orderByAsc('lft')->toArray();
@@ -47,6 +50,7 @@ class CategoriesController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+    #[Resource(label: 'View category articles')]
     public function view(?string $id = null)
     {
         if ($id === null) {
@@ -54,10 +58,10 @@ class CategoriesController extends AppController
         }
 
         $category = $this->Categories->get($id, contain: ['Articles' => [
-                'sort' => [
-                    '(CASE WHEN Articles.sort_order = 0 THEN 1 ELSE 0 END)' => 'asc',
-                    'Articles.sort_order' => 'asc',
-                ],
+            'sort' => [
+                '(CASE WHEN Articles.sort_order = 0 THEN 1 ELSE 0 END)' => 'asc',
+                'Articles.sort_order' => 'asc',
+            ],
         ]]);
 
         $crumbs = $this->Categories->find('path', for: $id)->toArray();
@@ -72,6 +76,7 @@ class CategoriesController extends AppController
      *
      * @return \Cake\Http\Response|void Redirects on successful add, renders view otherwise.
      */
+    #[Resource(label: 'Create a category')]
     public function add()
     {
         $category = $this->Categories->newEmptyEntity();
@@ -96,6 +101,7 @@ class CategoriesController extends AppController
      * @return \Cake\Http\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+    #[Resource(label: 'Edit a category')]
     public function edit(?string $id = null)
     {
         $category = $this->Categories->get($id);
@@ -120,6 +126,7 @@ class CategoriesController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+    #[Resource(label: 'Delete a category')]
     public function delete(?string $id = null)
     {
         $this->request->allowMethod(['post', 'delete']);

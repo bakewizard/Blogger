@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Blogger\Controller\Admin;
 
+use App\Attribute\Resource;
+
 /**
  * Articles Controller
  *
@@ -20,10 +22,11 @@ class ArticlesController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
+    #[Resource(label: 'List articles')]
     public function index()
     {
         $query = $this->Articles->find('search', search: $this->request->getQueryParams(), collection: 'backend')
-                ->contain(['Users', 'Categories']);
+            ->contain(['Users', 'Categories']);
 
         $articles = $this->paginate($query);
 
@@ -37,6 +40,7 @@ class ArticlesController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+    #[Resource(label: 'View an article')]
     public function view(?string $id = null)
     {
         $article = $this->Articles->get($id);
@@ -51,6 +55,7 @@ class ArticlesController extends AppController
      *
      * @return \Cake\Http\Response|void Redirects on successful add, renders view otherwise.
      */
+    #[Resource(label: 'Create an article')]
     public function add()
     {
         $article = $this->Articles->newEmptyEntity();
@@ -78,6 +83,7 @@ class ArticlesController extends AppController
      * @return \Cake\Http\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Http\Exception\NotFoundException When record not found.
      */
+    #[Resource(label: 'Edit an article')]
     public function edit(?string $id = null)
     {
         $article = $this->Articles->get($id, contain: ['Categories', 'Tags']);
@@ -106,6 +112,7 @@ class ArticlesController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+    #[Resource(label: 'Delete an article')]
     public function delete(?string $id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
