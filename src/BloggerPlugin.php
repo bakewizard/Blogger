@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Blogger;
 
-use App\Core\CmsPlugin;
+use App\Core\BasePlugin;
 use Blogger\Event\CommentListener;
 use Cake\Core\Configure;
 use Cake\Core\PluginApplicationInterface;
@@ -15,7 +15,7 @@ use Override;
 /**
  * Plugin for Blogger
  */
-class BloggerPlugin extends CmsPlugin
+class BloggerPlugin extends BasePlugin
 {
     protected ?string $name = 'Blogger';
     protected bool $consoleEnabled = false;
