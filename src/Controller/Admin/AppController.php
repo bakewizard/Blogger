@@ -27,6 +27,20 @@ class AppController extends BaseController
         $request = $this->getRequest();
         $controller = $request->getParam('controller');
         $action = $request->getParam('action');
+
+        $this->addCrumb(
+            preg_replace('/([A-Z])/', ' ' . '$1', $controller),
+            [
+                'prefix' => 'Admin',
+                'plugin' => 'Blogger',
+                'controller' => $controller,
+                'action' => 'index',
+            ],
+        );
+        if ($action !== 'index') {
+            $this->addCrumb($action);
+        }
+
         if ($controller === 'Articles' && in_array($action, ['view', 'edit', 'delete'])) {
             $id = $request->getParam('pass')[0];
             $article = $this->Articles->get($id);
