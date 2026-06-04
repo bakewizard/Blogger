@@ -28,15 +28,25 @@ class AppController extends BaseController
         $controller = $request->getParam('controller');
         $action = $request->getParam('action');
 
-        $this->addCrumb(
-            preg_replace('/([A-Z])/', ' ' . '$1', $controller),
-            [
-                'prefix' => 'Admin',
-                'plugin' => 'Blogger',
-                'controller' => $controller,
-                'action' => 'index',
-            ],
-        );
+        $this->addCrumb('Blogger', [
+            'prefix' => 'Admin',
+            'plugin' => 'Blogger',
+            'controller' => 'Dashboard',
+            'action' => 'index',
+        ]);
+
+        if ($controller !== 'Dashboard') {
+            $this->addCrumb(
+                preg_replace('/([A-Z])/', ' ' . '$1', $controller),
+                [
+                    'prefix' => 'Admin',
+                    'plugin' => 'Blogger',
+                    'controller' => $controller,
+                    'action' => 'index',
+                ],
+            );
+        }
+
         if ($action !== 'index') {
             $this->addCrumb($action);
         }
