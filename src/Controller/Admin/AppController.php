@@ -28,7 +28,7 @@ class AppController extends BaseController
         $controller = $request->getParam('controller');
         $action = $request->getParam('action');
 
-        $this->addCrumb('Blogger', [
+        $this->addBreadcrumb('Blogger', [
             'prefix' => 'Admin',
             'plugin' => 'Blogger',
             'controller' => 'Dashboard',
@@ -36,7 +36,7 @@ class AppController extends BaseController
         ]);
 
         if ($controller !== 'Dashboard') {
-            $this->addCrumb(
+            $this->addBreadcrumb(
                 preg_replace('/([A-Z])/', ' ' . '$1', $controller),
                 [
                     'prefix' => 'Admin',
@@ -48,7 +48,7 @@ class AppController extends BaseController
         }
 
         if ($action !== 'index') {
-            $this->addCrumb($action);
+            $this->addBreadcrumb($action);
         }
 
         if ($controller === 'Articles' && in_array($action, ['view', 'edit', 'delete'])) {
